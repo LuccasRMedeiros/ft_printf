@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strhvchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/03/31 18:15:35 by lrocigno         ###   ########.fr       */
+/*   Created: 2021/04/01 14:33:16 by lrocigno          #+#    #+#             */
+/*   Updated: 2021/04/01 14:47:36 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** This is a sub header of libft.h, it lists almost everything that is needed  -
-** to make ft_printf work properly.
-** Here are listed functions that are exclusive for ft_printf                  -
-** (ft_printf_parser for exemple), and definitions that are needed by ft_printf.
+** Takes a string and a char as arguments, the verify if the char exists on the-
+**  string, then returns 1 case the char is on the string 0 if not
 */
 
-#include <stdarg.h>
+#include <libft.h>
+
+int	ft_strhvchr(const char *str, const char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}

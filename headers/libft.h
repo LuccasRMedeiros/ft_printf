@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:29:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/03/31 18:20:56 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/01 19:18:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 void				*ft_calloc(size_t n_itens, size_t size);
+
 char				*ft_strdup(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -57,6 +58,10 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+char				*ft_dtox(int dn);
+char				*ft_reallocncat(char *dst, char const *src);
+int					ft_strhvchr(const char *str, const char c);
+
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
@@ -68,7 +73,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst,
 								void *(*f)(void *),
 								void (*del)(void *));
-char				*ft_dtox(int dn);
-char				*ft_reallocncat(char *dst, char const *src);
+
+int					ft_printf(const char *string, ...);
 
 #endif

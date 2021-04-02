@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 12:00:43 by lrocigno          #+#    #+#              #
-#    Updated: 2021/03/31 17:10:31 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/01 21:33:48 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ FLAGS = -Wall -Wextra -Werror
 ARCHV = ar -rcs
 
 HEADER = libft.h
+
+HEADER_PATH = ../headers/
 
 SRC =	ft_memset.c \
 		ft_bzero.c \
@@ -65,6 +67,7 @@ SRC =	ft_memset.c \
 		ft_lstmap.c \
 		ft_dtox.c \
 		ft_reallocncat.c \
+		ft_strhvchr.c \
 
 SRC_PATH = ./src
 
@@ -81,7 +84,7 @@ $(NAME): $(OUT_FULL)
 
 $(OUT_PATH)/%.o: $(SRC_PATH)/%.c
 	mkdir -p $(OUT_PATH)
-	$(CC) $(FLAGS) -I headers/ -o $@ -c $<
+	$(CC) $(FLAGS) -I $(HEADER_PATH) -o $@ -c $<
 
 all: $(NAME)
 
