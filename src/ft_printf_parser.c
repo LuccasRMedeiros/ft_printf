@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 13:50:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/01 21:44:38 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/02 10:56:56 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	ft_printf_parser_select(int i)
 		return (1);
 	else if (i >= 0 && i <= 7)
 		return (i + 2);
+	return (-1);
 }
 
 int			ft_printf_parser(const char c)

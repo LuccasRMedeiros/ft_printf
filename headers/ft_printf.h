@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/01 21:46:46 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/02 10:32:12 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@
 ** (ft_printf_parser for exemple), and definitions that are needed by ft_printf.
 */
 
+#ifndef FT_PRINTF
+# define FT_PRINTF
+
 #include <stdarg.h>
 
 #define P_CONVS "cspdiuxX%"
 #define P_FLAGS "-0.*"
 
 int	ft_printf_parser(const char c);
+
+#endif

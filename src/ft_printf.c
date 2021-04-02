@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/01 21:44:40 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/02 10:55:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_printf(const char *string, ...)
 
 	cnt = 0;
 	va_start(args, string);
-	while (*string[cnt])
+	while (string[cnt])
 	{
 		parser = ft_printf_parser(string[cnt]);
 		if (parser == 0)
