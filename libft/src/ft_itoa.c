@@ -6,31 +6,18 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:41:40 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/03/31 17:12:03 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/03 14:33:34 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-
-static size_t	intlen(int n)
-{
-	size_t len;
-
-	len = n ? 0 : 1;
-	while (n)
-	{
-		len ++;
-		n /= 10;
-	}
-	return (len);
-}
 
 static int		powerten(long int n)
 {
 	int	nlen;
 	int power;
 
-	nlen = intlen(n);
+	nlen = ft_intlen(n);
 	power = 1;
 	while (nlen > 1)
 	{
@@ -48,7 +35,7 @@ char			*ft_itoa(int n)
 	int			du;
 
 	ln = n;
-	itoa = malloc(sizeof(char) * (intlen(ln) + 1));
+	itoa = malloc(sizeof(char) * (ft_intlen(ln) + 1));
 	if (!itoa)
 		return (NULL);
 	i = 0;

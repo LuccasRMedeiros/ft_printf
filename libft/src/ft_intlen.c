@@ -1,51 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/26 13:07:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/03 14:33:33 by lrocigno         ###   ########.fr       */
+/*   Created: 2021/04/03 12:25:18 by lrocigno          #+#    #+#             */
+/*   Updated: 2021/04/03 14:40:00 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static int		powerten(long int n)
+size_t	ft_intlen(int n)
 {
-	int nlen;
-	int power;
+	size_t len;
 
-	nlen = ft_intlen(n);
-	power = 1;
-	while (nlen > 1)
+	len = 0;
+	while (n)
 	{
-		power *= 10;
-		nlen--;
+		len ++;
+		n /= 10;
 	}
-	return (power);
-}
-
-void			ft_putnbr_fd(int n, int fd)
-{
-	long int	ln;
-	int			i;
-	int			du;
-
-	ln = n;
-	i = 0;
-	if (ln < 0)
-	{
-		write(fd, "-", 1);
-		ln *= -1;
-	}
-	du = powerten(ln);
-	while (du > 0)
-	{
-		i = (ln / du) + 48;
-		ln %= du;
-		du /= 10;
-		write(fd, &i, 1);
-	}
+	return (len);
 }

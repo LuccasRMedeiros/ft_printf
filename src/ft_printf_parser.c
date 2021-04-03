@@ -6,16 +6,17 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 13:50:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/02 10:56:56 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:47:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Parser checks the actual character that is being printed and tell to pritnf -
-** how to deal with it
+** Parser checks the character that is being printed and tell to pritnf how to -
+** deal with it
 */
 
 #include <libft.h>
+#include <stdio.h>
 
 static int	ft_printf_parser_select(int i)
 {
@@ -32,13 +33,17 @@ int			ft_printf_parser(const char c)
 {
 	size_t		i;
 	static int	status;
+	int			sel;
 
 	i = 0;
 	while (c != P_CONVS[i] && P_CONVS[i])
 		i++;
-	if (status == 1 && ft_printf_parser_select(i) == 1)
+	sel = ft_printf_parser_select(i);
+	if ((status == 1 && sel == 1) || (status == 0 && sel != 1))
 		status = 0;
-	else
-		status = ft_printf_parser_select(i);
+	else if ((status == 0 && sel == 1) || status == 1)
+		status = sel;
+	else if (status > 1 && status <= 9)
+		status = 0;
 	return (status);
 }
