@@ -6,9 +6,16 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 09:29:11 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/03/29 18:59:28 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/03 19:35:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** ft_dtox takes an int as argument, converts it to hexadecimal base and return-
+**  a pointer to char containing the value formated as string.
+** It allocate memory like ft_itoa, so free is required to be used along with  -
+** this function.
+*/
 
 #include <libft.h>
 
@@ -16,7 +23,7 @@ static size_t	hex_len(int dn)
 {
 	size_t	len;
 
-	len = dn ? 0 : 1;
+	len = 0;
 	while (dn)
 	{
 		len++;
