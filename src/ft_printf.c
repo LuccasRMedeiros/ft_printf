@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/04 22:46:15 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/05 19:34:06 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,20 @@ int	ft_printf(const char *string, ...)
 	va_list			args;
 	size_t			cnt;
 	unsigned int	status;
-	void			*data;
-	ft_put			parser;
+	int				data;
+	ft_put			func;
 
 	cnt = 0;
 	status = 0;
 	va_start(args, string);
+	data = va_arg(args, int);
 	while (string[cnt])
 	{
-		parser = ft_printf_parser(string[cnt], &status);
+		func = ft_func_sel(string[cnt], &status);
 		if (!status)
 			ft_putchar_fd(string[cnt], 1);
-		else if (status >= 1 && status <= 4)
-		{
-			*data = va_arg(args, int);
-			parser(data, 1);
-		}
+		else if (status >= 2 && status <= 3)
+			func(&data, 1);
 		cnt++;
 	}
 	va_end(args);

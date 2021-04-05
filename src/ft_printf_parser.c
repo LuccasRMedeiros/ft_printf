@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_parser.c                                 :+:      :+:    :+:   */
+/*   ft_printf_func.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 13:50:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/04 22:28:48 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/05 18:54:58 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Parser checks the character that is being printed and tell to pritnf how to -
+** func checks the character that is being printed and tell to pritnf how to -
 ** deal with it.
-** To do so, ft_printf_parser changes the value contained into status address  -
+** To do so, ft_printf_func changes the value contained into status address  -
 ** and returns a pointer to a proper function to deal with the case.
 ** The possible values for "status" are in a range from 0 to 8. 0 tells printf -
-** to print the character it is looking to, 1 works as an alert to parser,     -
+** to print the character it is looking to, 1 works as an alert to func,     -
 ** 1 is a value that is only possible when the character is '%', that means the-
 **  next character will be a format specifier, and this make possible to printf-
 **  decide which "ft_put" function family is more adequate to deal with the    -
@@ -25,7 +25,7 @@
 
 #include <libft.h>
 
-static ft_put	parser_select(int i)
+static ft_put	select_case(int i)
 {
 	ft_put ret;
 
@@ -49,7 +49,7 @@ static ft_put	parser_select(int i)
 	return (ret);
 }
 
-ft_put			ft_printf_parser(const char c, unsigned int *status)
+ft_put			ft_func_sel(const char c, unsigned int *status)
 {
 	size_t		i;
 	ft_put		pf;
@@ -65,7 +65,7 @@ ft_put			ft_printf_parser(const char c, unsigned int *status)
 	else if (*status == 1 && (i >= 0 && i <= 8))
 	{
 		*status = 8 - i;
-		pf = parser_select(i);
+		pf = select_case(i);
 	}
 	return (pf);
 }
