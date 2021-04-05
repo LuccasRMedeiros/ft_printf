@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/04 01:33:31 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/04 22:46:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_printf(const char *string, ...)
 	va_list			args;
 	size_t			cnt;
 	unsigned int	status;
+	void			*data;
 	ft_put			parser;
 
 	cnt = 0;
@@ -35,8 +36,11 @@ int	ft_printf(const char *string, ...)
 		parser = ft_printf_parser(string[cnt], &status);
 		if (!status)
 			ft_putchar_fd(string[cnt], 1);
-		else if (status >= 2 && status <= 4) 
-			parser(va_arg(args, int), 1);
+		else if (status >= 1 && status <= 4)
+		{
+			*data = va_arg(args, int);
+			parser(data, 1);
+		}
 		cnt++;
 	}
 	va_end(args);

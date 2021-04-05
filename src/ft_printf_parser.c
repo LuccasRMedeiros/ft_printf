@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 13:50:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/04 01:14:14 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/04 22:28:48 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ static ft_put	parser_select(int i)
 
 	ret = NULL;
 	if (i == 1)
-		ret = &ft_putstr_fd;
+		ret = (ft_put)&ft_putstr_fd;
 	else if (i == 2)
-		ret = &ft_putstr_fd;
+		ret = (ft_put)&ft_putstr_fd;
 	else if (i == 3)
-		ret = &ft_putnbr_fd;
+		ret = (ft_put)&ft_putnbr_fd;
 	else if (i == 4)
-		ret = &ft_putnbr_fd;
+		ret = (ft_put)&ft_putnbr_fd;
 	else if (i == 5)
-		ret = &ft_putnbr_fd;
+		ret = (ft_put)&ft_putnbr_fd;
 	else if (i == 6)
-		ret = &ft_putstr_fd;
+		ret = (ft_put)&ft_putstr_fd;
 	else if (i == 7)
-		ret = &ft_putstr_fd;
+		ret = (ft_put)&ft_putstr_fd;
 	else
-		ret = &ft_putchar_fd;
+		ret = (ft_put)&ft_putchar_fd;
 	return (ret);
 }
 
@@ -61,10 +61,10 @@ ft_put			ft_printf_parser(const char c, unsigned int *status)
 	if (i > 8)
 		status = 0;
 	else if (!status && i == 8)
-		status = 1;
-	else if (status == 1 && (i >= 0 && i <= 8))
+		*status = 1;
+	else if (*status == 1 && (i >= 0 && i <= 8))
 	{
-		status = 9 - i;
+		*status = 8 - i;
 		pf = parser_select(i);
 	}
 	return (pf);
