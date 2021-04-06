@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/03 15:34:29 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/05 23:14:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main()
 	int		pf_ret;
 	char	*phrase;
 	int		test_num;
-
+	
 	phrase = "Let's see and compare: %d\n";
 	test_num = 123;
 	ret = ft_printf(phrase, test_num);

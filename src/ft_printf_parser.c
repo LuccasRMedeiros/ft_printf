@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 13:50:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/05 18:54:58 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/06 00:14:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 */
 
 #include <libft.h>
+#include <stdio.h>
 
 static ft_put	select_case(int i)
 {
@@ -49,7 +50,7 @@ static ft_put	select_case(int i)
 	return (ret);
 }
 
-ft_put			ft_func_sel(const char c, unsigned int *status)
+ft_put			ft_func_sel(const char c, int *status)
 {
 	size_t		i;
 	ft_put		pf;
@@ -58,10 +59,13 @@ ft_put			ft_func_sel(const char c, unsigned int *status)
 	pf = NULL;
 	while (c != P_CONVS[i] && P_CONVS[i])
 		i++;
+	
 	if (i > 8)
-		status = 0;
-	else if (!status && i == 8)
+		*status = 0;
+	else if (i == 8)
+	{
 		*status = 1;
+	}
 	else if (*status == 1 && (i >= 0 && i <= 8))
 	{
 		*status = 8 - i;

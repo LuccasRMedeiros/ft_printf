@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/05 19:23:36 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/05 23:49:48 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@
 
 typedef void (*ft_put)(void *, int);
 
-ft_put	ft_func_sel(const char c, unsigned int *status);
+ft_put	ft_func_sel(const char c, int *status);
 
 #endif
