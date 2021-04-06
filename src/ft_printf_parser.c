@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 13:50:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 00:14:21 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/06 10:24:04 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@ static ft_put	select_case(int i)
 	ft_put ret;
 
 	ret = NULL;
-	if (i == 1)
-		ret = (ft_put)&ft_putstr_fd;
-	else if (i == 2)
-		ret = (ft_put)&ft_putstr_fd;
+	if (i == 2)
+		ret = (ft_put)&ft_putchar_fd;
 	else if (i == 3)
 		ret = (ft_put)&ft_putnbr_fd;
 	else if (i == 4)
 		ret = (ft_put)&ft_putnbr_fd;
 	else if (i == 5)
-		ret = (ft_put)&ft_putnbr_fd;
-	else if (i == 6)
 		ret = (ft_put)&ft_putstr_fd;
+	else if (i == 6)
+		ret = (ft_put)&ft_putnbr_fd;
 	else if (i == 7)
 		ret = (ft_put)&ft_putstr_fd;
+	else if (i == 8)
+		ret = (ft_put)&ft_putstr_fd;
 	else
-		ret = (ft_put)&ft_putchar_fd;
+		ret = (ft_put)&ft_putstr_fd;
 	return (ret);
 }
 

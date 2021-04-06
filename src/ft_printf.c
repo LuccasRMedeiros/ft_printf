@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 00:15:35 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:07:28 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 static int	*int_parser(va_list args)
 {
 	int	holder;
-	int *address;
+	int	*address;
 
 	holder = va_arg(args, int);
 	address = &holder;

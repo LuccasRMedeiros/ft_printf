@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 13:07:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 00:15:32 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:07:56 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ static int		powerten(long int n)
 	return (power);
 }
 
-void			ft_putnbr_fd(int n, int fd)
+void			ft_putnbr_fd(int *n, int fd)
 {
 	long int	ln;
 	int			i;
 	int			du;
-	
-	printf("\e[0;32mt\e[0m");
-	ln = n;
+
+	ln = *n;
 	i = 0;
 	if (ln < 0)
 	{
