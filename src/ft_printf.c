@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 14:07:28 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/07 11:42:11 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,42 @@
 ** Printf should receive indenfinite arguments and interpolate them into the   -
 ** received string (if necessary and in the correct format) and print it in the-
 **  terminal.
-** Upon a succesfull execution, printf returns the amount of printed          -
+** Upon a succesfull execution, printf returns the amount of printed           -
 ** characters
 */
 
 #include <libft.h>
 #include <stdio.h>
 
-static int	*int_parser(va_list args)
+static int	stts_updt(unsigned int status, char c)
 {
-	int	holder;
-	int	*address;
+	size_t	i;
 
-	holder = va_arg(args, int);
-	address = &holder;
-	return (address);
-}
+	i = 0;
+	while (P_CONVS[i] && P_CONVS[i] != c)
+		i++;
+	if (i > 8 || (status == 1 && i == 8))
+		status == 0;
+	else if (!status && (i >= 0 && i <= 8))
+		status = 9 - i;
+	return (status);
+}		
 
 int	ft_printf(const char *string, ...)
 {
-	va_list	args;
-	size_t	cnt;
-	int		stt;
-	int		*status;
-	ft_put	func;
+	size_t			sti;
+	size_t			cnt;
+	unsigned int	status;
+	va_list			args;
 
+	sti = 0;
 	cnt = 0;
-	stt = 0;
-	status = &stt;
+	status = 0;
 	va_start(args, string);
-	while (string[cnt])
+	while (string[sti])
 	{
-		func = ft_func_sel(string[cnt], status);
-		if (*status == 0)
-			ft_putchar_fd(string[cnt], 1);
-		else if (*status >= 2 && *status <= 4)
-		{
-			func(int_parser(args), 1);
-		}
-		cnt++;
+		status = stts_updt(status, string[sti]);
+		cnt = status == 0 ? cnt + 1 : cnt + 0;
 	}
 	va_end(args);
 	return (cnt);
