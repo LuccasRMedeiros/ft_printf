@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/09 12:55:02 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/09 15:42:23 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,9 @@ LIB_SRC =	libft/src/ft_memset.c \
 			libft/src/ft_lstmap.c \
 			libft/src/ft_dtox.c \
 			libft/src/ft_reallocncat.c \
-			libft/src/ft_strhvchr.c \
 			libft/src/ft_intlen.c \
+			libft/src/ft_ltoa.c \
+			libft/src/ft_ltox.c \
 
 all: $(LIB)
 
