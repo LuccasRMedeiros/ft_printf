@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/07 11:04:46 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/09 12:55:02 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ HEADERS_PATH = headers/
 LIB = libft/libft.a
 
 SRC =	ft_printf.c \
+		pf_parser.c \
 
 SRC_PATH = ./src
 

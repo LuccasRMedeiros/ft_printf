@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:29:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 14:08:45 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:41:09 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "ft_printf.h"
+# include <stdbool.h>
 
 typedef struct		s_list
 {
@@ -46,8 +46,8 @@ int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 void				*ft_calloc(size_t n_itens, size_t size);
-
 char				*ft_strdup(const char *str);
+
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
@@ -58,7 +58,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int *n, int fd);
-char				*ft_dtox(int dn);
+char				*ft_dtox(int dn, bool lowercase);
 char				*ft_reallocncat(char *dst, char const *src);
 int					ft_strhvchr(const char *str, const char c);
 size_t				ft_intlen(int n);
@@ -74,7 +74,5 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst,
 								void *(*f)(void *),
 								void (*del)(void *));
-
-int					ft_printf(const char *string, ...);
 
 #endif

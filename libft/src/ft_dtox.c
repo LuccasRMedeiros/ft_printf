@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 09:29:11 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/03 19:35:16 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:09:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t	hex_len(int dn)
 	return (len);
 }
 
-char			*ft_dtox(int dn)
+char			*ft_dtox(int dn, bool lowercase)
 {
 	size_t	len;
 	char	dgt;
@@ -46,7 +46,7 @@ char			*ft_dtox(int dn)
 	{
 		dgt = dn % 16;
 		if (dgt > 9 && dgt < 16)
-			dgt += 55;
+			dgt = lowercase ? dgt + 87: dgt + 55;
 		else
 			dgt += 48;
 		hex[len] = dgt;

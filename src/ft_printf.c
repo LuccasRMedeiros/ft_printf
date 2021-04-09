@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/07 11:42:11 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 13:20:27 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,53 @@
 ** characters
 */
 
-#include <libft.h>
+#include <ft_printf.h>
 #include <stdio.h>
 
-static int	stts_updt(unsigned int status, char c)
+static unsigned int	type_check(unsigned int type, char c)
 {
-	size_t	i;
+	size_t			i;
+	unsigned int	ret;
 
 	i = 0;
+	ret = 0;
 	while (P_CONVS[i] && P_CONVS[i] != c)
 		i++;
-	if (i > 8 || (status == 1 && i == 8))
-		status == 0;
-	else if (!status && (i >= 0 && i <= 8))
-		status = 9 - i;
-	return (status);
-}		
+	if (i > 8 || (type == 1 && i == 8) || (i < 8 && type == 0))
+		ret	= 0;
+	else if (type == 0 && i == 8)
+		ret = 1;
+	else if (type == 1 && (i >= 0 && i <= 8))
+		ret = 9 - i;
+	return (ret);
+}
 
-int	ft_printf(const char *string, ...)
+int					ft_printf(const char *string, ...)
 {
 	size_t			sti;
 	size_t			cnt;
-	unsigned int	status;
+	unsigned int	type;
 	va_list			args;
+	char			*data;
 
 	sti = 0;
 	cnt = 0;
-	status = 0;
+	type = 0;
 	va_start(args, string);
 	while (string[sti])
 	{
-		status = stts_updt(status, string[sti]);
-		cnt = status == 0 ? cnt + 1 : cnt + 0;
+		type = type_check(type, string[sti]);
+		cnt = type == 0 ? cnt + 1 : cnt + 0;
+		if (type == 0)
+			ft_putchar_fd(string[sti], 1);
+		else if (type >= 2)
+		{
+			data = pf_parser(args, type);
+			cnt += ft_strlen(data);
+			ft_putstr_fd(data, 1);
+			free(data);
+		}
+		sti++;
 	}
 	va_end(args);
 	return (cnt);

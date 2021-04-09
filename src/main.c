@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 14:08:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:35:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** main is written accord to the norm, but that's not necessary.
 */
 
-#include <libft.h>
+#include <ft_printf.h>
 #include <stdio.h>
 
 int	main()

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/07 11:42:08 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:42:25 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@
 # define FT_PRINTF
 
 # include <stdarg.h>
+# include "libft.h"
 
 # define P_CONVS "Xxpusidc%"
 # define P_FLAGS "-0.*"
+
+int		ft_printf(const char *string, ...);
+char	*pf_parser(va_list args, unsigned int type);
 
 #endif
