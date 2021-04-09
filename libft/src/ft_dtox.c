@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 09:29:11 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 12:09:21 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 17:43:35 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include <libft.h>
 
-static size_t	hex_len(int dn)
+static size_t	hex_len(unsigned int dn)
 {
 	size_t	len;
 
@@ -32,7 +32,7 @@ static size_t	hex_len(int dn)
 	return (len);
 }
 
-char			*ft_dtox(int dn, bool lowercase)
+char			*ft_dtox(unsigned int dn, bool lowercase)
 {
 	size_t	len;
 	char	dgt;

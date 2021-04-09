@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 15:43:58 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:17:34 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ char		*pf_parser(va_list args, unsigned int type)
 	else if (type == 5)
 		ret = ft_strdup(va_arg(args, char*));
 	else if (type == 6)
-		ret = ft_itoa(va_arg(args, unsigned int));
+		ret = ft_utoa(va_arg(args, unsigned int));
 	else if (type == 7)
-		ret = pointer_parser(va_arg(args, long int));
+		ret = pointer_parser(va_arg(args, unsigned long int));
 	else if (type == 8)
-		ret = ft_dtox(va_arg(args, int), true);
+		ret = ft_dtox(va_arg(args, unsigned int), true);
 	else if (type == 9)
-		ret = ft_dtox(va_arg(args, int), false);
+		ret = ft_dtox(va_arg(args, unsigned int), false);
 	return (ret);
 }

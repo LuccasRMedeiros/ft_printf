@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 09:29:11 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 15:36:26 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:11:20 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include <libft.h>
 
-static size_t	hex_len(long int dn)
+static size_t	lhex_len(unsigned long int dn)
 {
 	size_t	len;
 
@@ -32,13 +32,13 @@ static size_t	hex_len(long int dn)
 	return (len);
 }
 
-char			*ft_ltox(long int dn, bool lowercase)
+char			*ft_ltox(unsigned long int dn, bool lowercase)
 {
 	size_t	len;
 	char	dgt;
 	char	*hex;
 
-	len = hex_len(dn);
+	len = lhex_len(dn);
 	if (!(hex = (char*)malloc(sizeof(char) * len)))
 		return (NULL);
 	hex[len] = 0;

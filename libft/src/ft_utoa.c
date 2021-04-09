@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:41:40 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 18:24:47 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:12:23 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static size_t	ft_lintlen(long int n)
+static size_t	ft_uintlen(unsigned int n)
 {
 	size_t len;
 
@@ -25,12 +25,12 @@ static size_t	ft_lintlen(long int n)
 	return (len);
 }
 
-static int		powerten(long long int n)
+static int		powerten(long int n)
 {
 	int	nlen;
 	int power;
 
-	nlen = ft_lintlen(n);
+	nlen = ft_intlen(n);
 	power = 1;
 	while (nlen > 1)
 	{
@@ -40,30 +40,25 @@ static int		powerten(long long int n)
 	return (power);
 }
 
-char			*ft_ltoa(long int ln)
+char			*ft_utoa(unsigned int n)
 {
-	long long int	lln;
-	char			*ltoa;
-	int				i;
-	int				du;
+	unsigned long int	ln;
+	char				*itoa;
+	int					i;
+	int					du;
 
-	lln = ln;
-	ltoa = malloc(sizeof(char) * (ft_lintlen(ln) + 1));
-	if (!ltoa)
+	ln = n;
+	itoa = malloc(sizeof(char) * (ft_uintlen(ln) + 1));
+	if (!itoa)
 		return (NULL);
 	i = 0;
-	if (lln < 0)
-	{
-		ltoa[i++] = '-';
-		lln *= -1;
-	}
-	du = powerten(lln);
+	du = powerten(ln);
 	while (du > 0)
 	{
-		ltoa[i++] = (lln / du) + 48;
-		lln %= du;
+		itoa[i++] = (ln / du) + 48;
+		ln %= du;
 		du /= 10;
 	}
-	ltoa[i] = '\0';
-	return (ltoa);
+	itoa[i] = '\0';
+	return (itoa);
 }
