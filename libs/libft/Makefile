@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 12:00:43 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/09 18:15:20 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/09 22:38:17 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ ARCHV = ar -rcs
 
 HEADER = libft.h
 
-HEADER_PATH = ../headers/
+HEADER_PATH = ./
 
 SRC =	ft_memset.c \
 		ft_bzero.c \
@@ -72,7 +72,7 @@ SRC =	ft_memset.c \
 		ft_ltox.c \
 		ft_utoa.c \
 
-SRC_PATH = ./src
+SRC_PATH = ./libft
 
 SRC_FULL = $(addprefix $(SRC_PATH)/,$(SRC))
 

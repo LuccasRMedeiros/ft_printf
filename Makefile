@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/09 18:15:04 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/09 21:48:04 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,9 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADERS = libft.h
+HEADERS = ft_printf.h
 
-HEADERS_PATH = headers/
-
-LIB = libft/libft.a
+HEADERS_PATH = ./
 
 SRC =	ft_printf.c \
 		pf_parser.c \
@@ -33,59 +31,63 @@ OUT_PATH = ./out
 
 OUT_FULL = $(addprefix $(OUT_PATH)/, $(OUT))
 
-LIB_SRC =	libft/src/ft_memset.c \
-			libft/src/ft_bzero.c \
-			libft/src/ft_memcpy.c \
-			libft/src/ft_memccpy.c \
-			libft/src/ft_memmove.c \
-			libft/src/ft_memchr.c \
-			libft/src/ft_memcmp.c \
-			libft/src/ft_strlen.c \
-			libft/src/ft_strlcpy.c \
-			libft/src/ft_strlcat.c \
-			libft/src/ft_strchr.c \
-			libft/src/ft_strrchr.c \
-			libft/src/ft_strnstr.c \
-			libft/src/ft_strncmp.c \
-			libft/src/ft_atoi.c \
-			libft/src/ft_isalpha.c \
-			libft/src/ft_isdigit.c \
-			libft/src/ft_isalnum.c \
-			libft/src/ft_isascii.c \
-			libft/src/ft_isprint.c \
-			libft/src/ft_toupper.c \
-			libft/src/ft_tolower.c \
-			libft/src/ft_calloc.c \
-			libft/src/ft_strdup.c \
-			libft/src/ft_substr.c \
-			libft/src/ft_strjoin.c \
-			libft/src/ft_strtrim.c \
-			libft/src/ft_split.c \
-			libft/src/ft_itoa.c \
-			libft/src/ft_strmapi.c \
-			libft/src/ft_putchar_fd.c \
-			libft/src/ft_putstr_fd.c \
-			libft/src/ft_putendl_fd.c \
-			libft/src/ft_putnbr_fd.c \
-			libft/src/ft_lstnew.c \
-			libft/src/ft_lstadd_front.c \
-			libft/src/ft_lstsize.c \
-			libft/src/ft_lstlast.c \
-			libft/src/ft_lstadd_back.c \
-			libft/src/ft_lstdelone.c \
-			libft/src/ft_lstclear.c \
-			libft/src/ft_lstiter.c \
-			libft/src/ft_lstmap.c \
-			libft/src/ft_dtox.c \
-			libft/src/ft_reallocncat.c \
-			libft/src/ft_intlen.c \
-			libft/src/ft_ltoa.c \
-			libft/src/ft_ltox.c \
-			libft/src/ft_utoa.c \
+LIBS =	ft_memset.c \
+		ft_bzero.c \
+		ft_memcpy.c \
+		ft_memccpy.c \
+		ft_memmove.c \
+		ft_memchr.c \
+		ft_memcmp.c \
+		ft_strlen.c \
+		ft_strlcpy.c \
+		ft_strlcat.c \
+		ft_strchr.c \
+		ft_strrchr.c \
+		ft_strnstr.c \
+		ft_strncmp.c \
+		ft_atoi.c \
+		ft_isalpha.c \
+		ft_isdigit.c \
+		ft_isalnum.c \
+		ft_isascii.c \
+		ft_isprint.c \
+		ft_toupper.c \
+		ft_tolower.c \
+		ft_calloc.c \
+		ft_strdup.c \
+		ft_substr.c \
+		ft_strjoin.c \
+		ft_strtrim.c \
+		ft_split.c \
+		ft_itoa.c \
+		ft_strmapi.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		ft_putendl_fd.c \
+		ft_putnbr_fd.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c \
+		ft_dtox.c \
+		ft_reallocncat.c \
+		ft_intlen.c \
+		ft_ltoa.c \
+		ft_ltox.c \
+		ft_utoa.c \
 
-all: $(LIB)
+LIBS_PATH = libs/libft/src
 
-$(LIB) : $(OUT_FULL)
+LIBS_FULL = $(addprefix $(LIBS_PATH)/, $(LIBS))
+
+all: $(LIBS_FULL)
+
+$(LIBS_FULL) : $(OUT_FULL)
 	cd libft && make
 
 $(OUT_FULL): $(SRC_FULL)
@@ -103,7 +105,7 @@ fclean:
 re: fclean all
 
 exec:
-	echo "Not the best way of doing things"
+	echo "Not the best way of to do things"
 	$(CC) $(FLAGS) -I $(HEADERS_PATH) $(SRC_PATH)/main.c $(SRC_FULL) $(LIB_SRC) -o exec
 	./exec
 	rm -f exec

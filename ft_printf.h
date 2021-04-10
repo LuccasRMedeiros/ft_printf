@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 12:42:25 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/09 22:54:11 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 **  the specifiers according the ones who uses functions without any kind of   -
 ** treatment needed before printing. The positions are inverse to status (see  -
 ** ft_printf) to avoid an undesirable conversion inside the global variable.
+** P_FLAGS are used to formating the format specifiers. Consider each symbols  -
+** as masks.
 */
 
 #ifndef FT_PRINTF
 # define FT_PRINTF
 
 # include <stdarg.h>
-# include "libft.h"
+# include "./libs/libft/libft.h"
 
 # define P_CONVS "Xxpusidc%"
 # define P_FLAGS "-0.*"
