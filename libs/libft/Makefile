@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 12:00:43 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/09 22:38:17 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/10 20:45:01 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC =	ft_memset.c \
 		ft_ltoa.c \
 		ft_ltox.c \
 		ft_utoa.c \
+		ft_strhvchr.c \
 
 SRC_PATH = ./libft
 

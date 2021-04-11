@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 18:17:34 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/11 00:16:25 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,33 @@
 
 #include <ft_printf.h>
 
-static char *char_parser(char arg)
+static char *char_parser(char arg, t_fspec *type)
 {
-	char *ret;
+	size_t	i;
+	char	*ret;
 
-	ret = malloc(sizeof(char*));
+	i = 0;
+	ret = malloc(sizeof(char*) * type->spaces);
 	if (!ret)
 		return (NULL);
-	ret[0] = arg;
+	if (type->align == '-')
+	{
+		ret[0] = arg;
+		i = 1;
+		while (i <= type->spaces)
+		{
+			ret[i] = type->fill ? '0' : ' ';
+			i++;
+		}
+	}
+	else
+	{
+		while (i <= type->spaces)
+		{
+			ret[i] = type->fill ? '0' : ' ';
+			i++;
+		}
+	}
 	ret[1] = '\0';
 	return (ret);
 }
@@ -57,13 +76,10 @@ static char *pointer_parser(long int arg)
 	return (ret);
 }
 
-char		*pf_parser(va_list args, unsigned int type)
+char		*pf_parser(va_list args, t_fspec **type)
 {
-	char	*ret;
-
-	ret = NULL;
-	if (type == 2)
-		ret = char_parser(va_arg(args, int));
+	if (*type->format == 'c')
+		*type->output = char_parser(va_arg(args, int));
 	else if (type == 3 || type == 4)
 		ret = ft_itoa(va_arg(args, int));
 	else if (type == 5)

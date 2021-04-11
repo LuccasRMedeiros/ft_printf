@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:29:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 18:14:32 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/10 20:58:01 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int *n, int fd);
 char				*ft_dtox(unsigned int dn, bool lowercase);
 char				*ft_reallocncat(char *dst, char const *src);
-int					ft_strhvchr(const char *str, const char c);
 size_t				ft_intlen(int n);
 char				*ft_ltoa(long int n);
 char				*ft_ltox(unsigned long int dn, bool lowercase);
 char				*ft_utoa(unsigned int n);
+bool				ft_strhvchr(char c, const char *string);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);

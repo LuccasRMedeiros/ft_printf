@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_char.h                                          :+:      :+:    :+:   */
+/*   ft_strhvchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 22:56:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 23:26:42 by lrocigno         ###   ########.fr       */
+/*   Created: 2021/04/10 20:29:12 by lrocigno          #+#    #+#             */
+/*   Updated: 2021/04/10 20:41:30 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** This is a subheader of ft_printf, as it is just to be used by ft_printf ONLY.
-** Here a concept of a "char" is used to implement the format specification of -
-** the original printf.
+** Receives a char and a string and search for the char into the string. If    -
+** find it, returns true, otherwise, false.
 */
 
-#define MASK "\%-0c"
+#include <libft.h>
 
-typedef struct s_fspec_char
+bool	ft_strhvchr(char c, const char *string)
 {
-	char	init;
-	char	signal;
-	int		space;
-	char	format;
+	size_t	i;
+
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == c)
+			return (true);
+		i++;
+	}
+	return (false);
 }

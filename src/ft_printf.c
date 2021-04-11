@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 13:20:27 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/10 23:52:34 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,47 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static unsigned int	type_check(unsigned int type, char c)
+static t_fspec	*type_check(t_fspec **type, char *string)
 {
-	size_t			i;
-	unsigned int	ret;
+	size_t	i;
 
-	i = 0;
-	ret = 0;
-	while (P_CONVS[i] && P_CONVS[i] != c)
+	i = 1;
+	*type->init = true;
+	if (ft_strhvchr(string[i], P_FLAGS))
+	{
+		*type->align = string[i];
 		i++;
-	if (i > 8 || (type == 1 && i == 8) || (i < 8 && type == 0))
-		ret	= 0;
-	else if (type == 0 && i == 8)
-		ret = 1;
-	else if (type == 1 && (i >= 0 && i <= 8))
-		ret = 9 - i;
-	return (ret);
+	}
+	if (string[i] == '0')
+	{
+		*type->fill = true;
+		i++;
+	}
+	if (ft_isnum(string[i]))
+	{
+		*type->spaces = ft_atoi(string + i);
+		i += ft_intlen(*type->spaces);
+	}
+	*type->format = string[i];
+	return (*type_check);
 }
 
-int					ft_printf(const char *string, ...)
+int				ft_printf(const char *string, ...)
 {
-	size_t			sti;
-	size_t			cnt;
-	unsigned int	type;
-	va_list			args;
-	char			*data;
+	size_t	sti;
+	size_t	cnt;
+	va_list	args;
+	t_fspec	*type;
 
 	sti = 0;
 	cnt = 0;
-	type = 0;
+	type = new_fspec();
 	va_start(args, string);
 	while (string[sti])
 	{
-		type = type_check(type, string[sti]);
-		cnt = type == 0 ? cnt + 1 : cnt + 0;
-		if (type == 0)
-			ft_putchar_fd(string[sti], 1);
-		else if (type >= 2)
-		{
-			data = pf_parser(args, type);
-			cnt += ft_strlen(data);
-			ft_putstr_fd(data, 1);
-			free(data);
-		}
+		if (string[sti] == '%')
+			type = type_check(&type, string + sti);
+		ft_putchar_fd(string[sti], 1);
 		sti++;
 	}
 	va_end(args);
