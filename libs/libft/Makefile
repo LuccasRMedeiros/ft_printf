@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 12:00:43 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/10 20:45:01 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/11 16:34:43 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ SRC =	ft_memset.c \
 		ft_utoa.c \
 		ft_strhvchr.c \
 
-SRC_PATH = ./libft
+SRC_PATH = ./src
 
 SRC_FULL = $(addprefix $(SRC_PATH)/,$(SRC))
 
@@ -84,19 +84,19 @@ OUT_PATH = ./out
 OUT_FULL = $(addprefix $(OUT_PATH)/,$(OUT))
 
 $(NAME): $(OUT_FULL)
-	$(ARCHV) $(NAME) $(OUT_FULL)
+	@$(ARCHV) $(NAME) $(OUT_FULL)
 
-$(OUT_PATH)/%.o: $(SRC_PATH)/%.c
-	mkdir -p $(OUT_PATH)
-	$(CC) $(FLAGS) -I $(HEADER_PATH) -o $@ -c $<
+$(OUT_FULL): $(SRC_FULL)
+	@mkdir -p $(OUT_PATH)
+	@$(CC) $(FLAGS) -I $(HEADER_PATH) -o $@ -c $<
 
 all: $(NAME)
 
 clean: 
-	rm -rf ./out
+	@rm -rf ./out
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

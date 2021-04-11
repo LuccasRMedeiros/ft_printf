@@ -6,14 +6,17 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:22:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/11 00:06:47 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/11 10:50:13 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** This function is use to create and initialize a t_fspec structure pointer.
-** The pointer address is given by malloc, so every call must have a free when -
-** such pointer don't be necessary anymore.
+** Functions heres are for manage t_fspec types.
+** new_fspec return a pointer to an initialized t_fspec. It uses malloc to     -
+** allocate an address to it. That mean when a t_fspec isn't needed anymore,   -
+** such address must be freed, here comes the destroy_fspec.
+** destroy_fspec anullates each data contained in each part of the structure,  -
+** then free the pointer and do not return.
 */
 
 t_fspec	*new_fspec(void)

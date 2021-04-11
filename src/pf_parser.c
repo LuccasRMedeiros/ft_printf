@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/11 00:16:25 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/11 10:58:18 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ static char *char_parser(char arg, t_fspec *type)
 	ret = malloc(sizeof(char*) * type->spaces);
 	if (!ret)
 		return (NULL);
-	if (type->align == '-')
-	{
-		ret[0] = arg;
-		i = 1;
-		while (i <= type->spaces)
-		{
-			ret[i] = type->fill ? '0' : ' ';
-			i++;
-		}
-	}
-	else
-	{
-		while (i <= type->spaces)
-		{
-			ret[i] = type->fill ? '0' : ' ';
-			i++;
-		}
-	}
-	ret[1] = '\0';
 	return (ret);
 }
 

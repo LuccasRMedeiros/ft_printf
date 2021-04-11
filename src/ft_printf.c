@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/10 23:52:34 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/11 10:58:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_fspec	*type_check(t_fspec **type, char *string)
 	if (ft_isnum(string[i]))
 	{
 		*type->spaces = ft_atoi(string + i);
+		*type->spaces = *type->spaces < 0 ? 0 : *type-spaces;
 		i += ft_intlen(*type->spaces);
 	}
 	*type->format = string[i];
