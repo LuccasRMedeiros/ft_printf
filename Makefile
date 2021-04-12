@@ -6,11 +6,11 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/11 19:03:55 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/11 21:04:51 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libprintf.a
+NAME = libftprintf.a
 
 CC = gcc
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 ARSCRIPT = ft_printf_comp
 
-ARCHV = ar -M $(ARSCRIPT)
+ARCHV = ar -m $(ARSCRIPT)
 
 LIBS = libft.a
 
@@ -48,28 +48,39 @@ OUT_PATH = ./out
 
 OUT_FULL = $(addprefix $(OUT_PATH)/, $(OUT))
 
+makelibft:
+	@echo "\tCompiling libft"
+	@mkdir -p $(OUT_PATH)
+	@cd $(LIBS_DIR) && make all
+
+name: $(NAME)
+
 $(NAME): $(OUT_FULL)
+	@echo "\tGenerating archive script"
 	@echo "CREATE $(NAME)" > $(ARSCRIPT)
 	@echo "ADDLIB $(LIBS_DIR)/$(LIBS)" > $(ARSCRIPT)
 	@echo "ADDMOD $(OUT_FULL)" > $(ARSCRIPT)
 	@echo "SAVE" > $(ARSCRIPT)
+	@echo "\tDone"
+	@echo "\tCreating archive"
 	@$(ARCHV) $(ARSCRIPT)
+	@echo "\tDeleting script"
 	@rm -f $(ARSCRIPT)
 
 $(OUT_FULL): $(SRC_FULL)
-	@cd $(LIBS_DIR) && make
-	@cd ../..
-	@mkdir $(OUT_PATH)
+	@echo "\tCompiling ft_printf"
 	@$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
 
-all: $(NAME)
+all: makelibft name
 
 clean:
+	@echo "\tCleaning objects"
 	@rm -rf $(OUT_PATH)
 	@rm -f exec
 	@cd $(LIBS_DIR) && make clean
 
 fclean:
+	@echo "\tCleaning ft_printf"
 	@rm -f $(NAME)
 	@rm -rf $(OUT_PATH)
 	@rm -f exec
@@ -78,7 +89,8 @@ fclean:
 re: fclean all
 
 exec: all
-	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lprintf -o exec
+	@echo "\tCreating executable"
+	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o exec
 	@./exec
 
 .PHONY: all clean fclean re

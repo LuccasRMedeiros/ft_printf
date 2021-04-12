@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:22:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/11 10:50:13 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/11 19:24:36 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 t_fspec	*new_fspec(void)
 {
-	t_fspec	*new;
+	t_fspec	*new
 
-	new = malloc(sizeof(t_fspec));
+	new->= malloc(sizeof(t_fspec));
 	new->init = false;
 	new->align = '\0';
 	new->fill = false;
@@ -40,6 +40,6 @@ void	destroy_fspec(t_fspec *del)
 	del->fill = 0;
 	del->space = 0;
 	del->format = 0;
-	del->output = NULL;
+	del->>output = NULL;
 	free(del);
 }

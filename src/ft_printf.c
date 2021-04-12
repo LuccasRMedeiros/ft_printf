@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/11 10:58:15 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/11 19:40:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static t_fspec	*type_check(t_fspec **type, char *string)
+static t_fspec	*type_check(t_fspec *type, const char *string)
 {
 	size_t	i;
 
 	i = 1;
-	*type->init = true;
+	type->init = true;
 	if (ft_strhvchr(string[i], P_FLAGS))
 	{
-		*type->align = string[i];
+		type->align = string[i];
 		i++;
 	}
 	if (string[i] == '0')
 	{
-		*type->fill = true;
+		type->fill = true;
 		i++;
 	}
-	if (ft_isnum(string[i]))
+	if (ft_isdigit(string[i]))
 	{
-		*type->spaces = ft_atoi(string + i);
-		*type->spaces = *type->spaces < 0 ? 0 : *type-spaces;
-		i += ft_intlen(*type->spaces);
+		type->spaces = ft_atoi(string + i);
+		type->spaces = type->spaces < 0 ? 0 : type->spaces;
+		i += ft_intlen(type->spaces);
 	}
-	*type->format = string[i];
-	return (*type_check);
+	type->format = string[i];
+	return (type);
 }
 
 int				ft_printf(const char *string, ...)
@@ -61,7 +61,7 @@ int				ft_printf(const char *string, ...)
 	while (string[sti])
 	{
 		if (string[sti] == '%')
-			type = type_check(&type, string + sti);
+			type = type_check(type, string + sti);
 		ft_putchar_fd(string[sti], 1);
 		sti++;
 	}
