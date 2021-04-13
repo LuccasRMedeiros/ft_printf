@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/11 19:40:54 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 11:52:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ static t_fspec	*type_check(t_fspec *type, const char *string)
 
 	i = 1;
 	type->init = true;
-	if (ft_strhvchr(string[i], P_FLAGS))
+	if (ft_strhvchr(string[i], P_ALIGN))
 	{
 		type->align = string[i];
 		i++;
 	}
-	if (string[i] == '0')
+	if (ft_strhvchr(string[i], P_FILLR))
 	{
 		type->fill = true;
 		i++;
 	}
-	if (ft_isdigit(string[i]))
+	if (ft_isdigit(string[i]) && string[i] != '0')
 	{
 		type->spaces = ft_atoi(string + i);
 		type->spaces = type->spaces < 0 ? 0 : type->spaces;
@@ -60,11 +60,17 @@ int				ft_printf(const char *string, ...)
 	va_start(args, string);
 	while (string[sti])
 	{
-		if (string[sti] == '%')
+			if (string[sti] == '%')
+		{
 			type = type_check(type, string + sti);
+			type->output = pf_textformat(type, pf_parser(args, type));
+			ft_putstr_fd(type->output, 1);
+			cnt += ft_strlen(type->output);
+		}
 		ft_putchar_fd(string[sti], 1);
 		sti++;
 	}
 	va_end(args);
+	del_fspec(&type);
 	return (cnt);
 }

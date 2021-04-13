@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/12 22:24:07 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 11:16:59 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@
 
 #include <ft_printf.h>
 
-static char *char_parser(char arg, t_fspec *type)
+static char *char_parser(char arg)
 {
 	size_t	i;
 	char	*ret;
 
 	i = 0;
-	ret = malloc(sizeof(char*) * type->spaces);
+	ret = malloc(sizeof(char) + 1);
 	if (!ret)
 		return (NULL);
+	ret[0] = arg;
+	ret[1] = '\0';
 	return (ret);
 }
 
@@ -57,20 +59,24 @@ static char *pointer_parser(long int arg)
 	return (ret);
 }
 
-void		pf_parser(va_list args, t_fspec *type)
+char		pf_parser(va_list args, t_fspec *type)
 {
+	char	*ret;
+
+	ret = NULL;
 	if (type->format == 'c')
-		type->output = char_parser(va_arg(args, int));
+		ret = char_parser(va_arg(args, int));
 	else if (type->format == 'd' || type->format == 'i')
-		type->output = ft_itoa(va_arg(args, int));
+		ret = ft_itoa(va_arg(args, int));
 	else if (type->format == 's')
-		type->output = ft_strdup(va_arg(args, char*));
+		ret = ft_strdup(va_arg(args, char*));
 	else if (type->format == 'u')
-		type->output = ft_utoa(va_arg(args, unsigned int));
+		ret = ft_utoa(va_arg(args, unsigned int));
 	else if (type->format == 'p')
-		type->output = pointer_parser(va_arg(args, unsigned long int));
+		ret = pointer_parser(va_arg(args, unsigned long int));
 	else if (type->format == 'x')
-		type->output = ft_dtox(va_arg(args, unsigned int), true);
+		ret = ft_dtox(va_arg(args, unsigned int), true);
 	else if (type->format == 'X')
-		type->output = ft_dtox(va_arg(args, unsigned int), false);
+		ret = ft_dtox(va_arg(args, unsigned int), false);
+	return (ret);
 }

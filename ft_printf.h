@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/11 10:51:33 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 11:53:12 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,23 @@
 # include "./libs/libft/libft.h"
 
 # define P_CONVS "Xxpusidc"
-# define P_FLAGS "-.*"
+# define P_ALIGN "-."
+# define P_FILLR "*0"
 
 typedef struct	s_fspec
 {
 	bool	init;
 	char	align;
-	bool	fill;
+	char	fill;
 	size_t	spaces;
 	char	format;
 	char	*output;
 }				t_fspec;
 
 int		ft_printf(const char *string, ...);
-char	*pf_parser(va_list args, unsigned int type);
+char	*pf_parser(va_list args, t_fspec *type);
+char	*pf_textformat(t_fspec *type, char *data);
 t_fspec	*new_fspec(void);
-void	destroy_fspec(t_fspec *del);
+void	del_fspec(t_fspec **del);
 
 #endif

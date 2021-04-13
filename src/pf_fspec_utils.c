@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:22:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/12 23:40:04 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 11:53:10 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ t_fspec	*new_fspec(void)
 	return (new);
 }
 
-void	del_fspec(t_fspec *del)
+void	del_fspec(t_fspec **del)
 {
-	del->init = 0;
-	del->align = 0;
-	del->fill = 0;
-	del->spaces = 0;
-	del->format = 0;
-	del->output = NULL;
-	free(del);
+	*del->init = 0;
+	*del->align = 0;
+	*del->fill = 0;
+	*del->spaces = 0;
+	*del->format = 0;
+	*del->output = NULL;
+	free(*del);
 }
