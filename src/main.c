@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 22:23:00 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/14 11:34:33 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 
 int	main(void)
 {
-	int				ret;
+	//int				ret;
 	char			*phrase;
-	char			*test;
+	//char			*test;
 	int				test1;
 	int				pf_ret;
 	
-	phrase = "Let's see and compare: %-5s %% %-05d \n";
-	test = "123";
-	test1 = -123;
-	ret = ft_printf(phrase, test, test1);
-	pf_ret = printf(phrase, test, test1);
-	printf("Return of ft_printf: \e[1;33m%d\e[0m\n", ret);
+	phrase = "Let's see and compare: %*2d\n\n";
+	//test = "123456789";
+	test1 = 123;
+	//ret = ft_printf(phrase, test, test1);
+	pf_ret = printf(phrase, test1);//, test1);
+	//printf("Return of ft_printf: \e[1;33m%d\e[0m\n", ret);
 	printf("Return of printf: \e[1;33m%d\e[0m\n", pf_ret);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 22:17:54 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/14 11:41:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,42 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
+static int		flagid(char c)
+{
+	if (ft_strhvchr(c, P_CONVS))
+		return (1);
+	else if (ft_strhvchr(c, P_ALIGN))
+		return (2);
+	else if (ft_strhvchr(c, P_FILLR))
+		return (3);
+	else if (c == '.')
+		return (4);
+	return (0);
+}
+
 static size_t	type_check(t_fspec **type, const char *string)
 {
 	size_t	i;
+	size_t	fillers;
 	t_fspec	*aux;
 
-	i = 1;
+	i = 0;
+	fillers = 0;
 	aux = *type;
-	aux->init = true;
-	if (ft_strhvchr(string[i], P_ALIGN))
+	while (!aux->format)
 	{
-		aux->align = string[i];
-		i++;
+		if (flagid(string[i]) == 1)
+			aux->format = string[i];
+		else if (flagid(string[i]) == 2 && (!aux->fill && !aux->align))
+			aux->align = string[i];
+		else if (flagid(string[i]) == 3 && (!aux->precision))
+			aux->filler[fillers++] = string[i];
+		else if (flagid(string[i]) == 4 && (!aux->precision))
+			aux->precision = true;
+		else
+
+			
 	}
-	if (ft_strhvchr(string[i], P_FILLR))
-	{
-		aux->fill = true;
-		i++;
-	}
-	if (ft_isdigit(string[i]) && string[i] != '0')
-	{
-		aux->spaces = ft_atoi(string + i);
-		aux->spaces = aux->spaces < 0 ? 0 : aux->spaces;
-		i += ft_intlen(aux->spaces);
-	}
-	aux->format = string[i];
 	return (i);
 }
 
@@ -64,7 +75,7 @@ int				ft_printf(const char *string, ...)
 	{
 		if (string[sti] == '%')
 		{
-			sti += type_check(&type, string + sti) + 1;
+			sti += type_check(&type, string + sti + 1) + 1;
 			type->output = pf_textformat(type, pf_parser(args, type));
 			ft_putstr_fd(type->output, 1);
 			cnt += ft_strlen(type->output);

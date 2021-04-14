@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/13 21:58:38 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/14 10:38:06 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-BIN = ftprint
+BIN = exectest
 
 MSG_DONE = echo "-- Done!\n"
 
@@ -88,7 +88,7 @@ re: fclean all
 exec: all
 	@echo "-- Compiling executable"
 	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o $(BIN)
-	@echo "To use it call ./$(BIN)"
 	@$(MSG_DONE)
+	@./$(BIN)
 
 .PHONY: all clean fclean re exec makedeps
