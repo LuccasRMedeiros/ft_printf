@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 11:52:16 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:17:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,32 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static t_fspec	*type_check(t_fspec *type, const char *string)
+static size_t	type_check(t_fspec **type, const char *string)
 {
 	size_t	i;
+	t_fspec	*aux;
 
 	i = 1;
-	type->init = true;
+	aux = *type;
+	aux->init = true;
 	if (ft_strhvchr(string[i], P_ALIGN))
 	{
-		type->align = string[i];
+		aux->align = string[i];
 		i++;
 	}
 	if (ft_strhvchr(string[i], P_FILLR))
 	{
-		type->fill = true;
+		aux->fill = true;
 		i++;
 	}
 	if (ft_isdigit(string[i]) && string[i] != '0')
 	{
-		type->spaces = ft_atoi(string + i);
-		type->spaces = type->spaces < 0 ? 0 : type->spaces;
-		i += ft_intlen(type->spaces);
+		aux->spaces = ft_atoi(string + i);
+		aux->spaces = aux->spaces < 0 ? 0 : aux->spaces;
+		i += ft_intlen(aux->spaces);
 	}
-	type->format = string[i];
-	return (type);
+	aux->format = string[i];
+	return (i);
 }
 
 int				ft_printf(const char *string, ...)
@@ -56,21 +58,22 @@ int				ft_printf(const char *string, ...)
 
 	sti = 0;
 	cnt = 0;
-	type = new_fspec();
+	type = pf_newfspec();
 	va_start(args, string);
 	while (string[sti])
 	{
-			if (string[sti] == '%')
+		if (string[sti] == '%')
 		{
-			type = type_check(type, string + sti);
+			sti += type_check(&type, string + sti) + 1;
 			type->output = pf_textformat(type, pf_parser(args, type));
 			ft_putstr_fd(type->output, 1);
 			cnt += ft_strlen(type->output);
 		}
 		ft_putchar_fd(string[sti], 1);
+		cnt++;
 		sti++;
 	}
 	va_end(args);
-	del_fspec(&type);
+	pf_delfspec(&type);
 	return (cnt);
 }

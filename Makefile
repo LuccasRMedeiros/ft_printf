@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/13 12:41:41 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/13 21:58:38 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-BIN = ftprintf
+BIN = ftprint
+
+MSG_DONE = echo "-- Done!\n"
 
 ARCHV = ar -rcs
 
@@ -27,52 +29,66 @@ LIBS_DIR = ./libs/libft
 HEADERS = ft_printf.h \
 		  libft.h \
 
-INCLUDES_PATH =	./ \
-				$(LIBS_DIR) \
+INCLUDES_PATH =	./\
+				$(LIBS_DIR)\
 
 INCLUDES = $(foreach i, $(INCLUDES_PATH), -I $(i))
 
 SRC =	ft_printf.c \
-		pf_fspec_utils.c \
+		pf_newfspec.c \
+		pf_delfspec.c \
 		pf_parser.c \
+		pf_textformat.c \
 
 SRC_PATH = ./src
 
 SRC_FULL = $(addprefix $(SRC_PATH)/, $(SRC))
 
-OUT = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=%.o)
 
-OUT_PATH = ./out
+OBJ_PATH = ./out
 
-OUT_FULL = $(addprefix $(OUT_PATH)/, $(OUT))
-
-$(NAME): makedeps $(OUT_FULL)
-	cp $(LIBS_DIR)/$(LIBS) ./$(NAME)
-	$(ARCHV) $(NAME) $(OUT_FULL)
+OBJ_FULL = $(addprefix $(OBJ_PATH)/, $(OBJ))
 
 makedeps:
-	@make -C $(LIBS_DIR)
-	@mkdir -p $(OUT_PATH)
+	@echo "-- Creating ft_printf dependencies"
+	@make -C $(LIBS_DIR) all
+	@mkdir -p $(OBJ_PATH)
 
-$(OUT_FULL): $(SRC_FULL)
+$(NAME): makedeps $(OBJ_FULL)
+	@echo "-- Creating static library FTPRINTF"
+	@cp $(LIBS_DIR)/$(LIBS) ./$(NAME)
+	@$(ARCHV) $(NAME) $(OBJ_FULL)
+	@$(MSG_DONE)
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@echo "-- Compiling $@"
 	@$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 all: $(NAME)
 
 clean:
-	@rm -rf $(OUT_PATH)
-	@rm -f exec
+	@echo "-- Removing ft_printf objects"
+	@rm -rf $(OBJ_PATH)
+	@rm -f $(BIN)
+	@$(MSG_DONE)
 	@make -C $(LIBS_DIR) clear
 
 fclean:
+	@echo "-- Removing everything of ft_printf"
+	@echo "NOTE: source code will be preserved"
 	@rm -f exec
 	@rm -f $(NAME)
-	@rm -rf $(OUT_PATH)
+	@rm -rf $(OBJ_PATH)
+	@$(MSG_DONE)
 	@make -C $(LIBS_DIR) fclean
 
 re: fclean all
 
 exec: all
-	$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o $(BIN)
+	@echo "-- Compiling executable"
+	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o $(BIN)
+	@echo "To use it call ./$(BIN)"
+	@$(MSG_DONE)
 
 .PHONY: all clean fclean re exec makedeps

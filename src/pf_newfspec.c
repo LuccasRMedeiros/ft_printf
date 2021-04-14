@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_fspec_utils.c                                   :+:      :+:    :+:   */
+/*   pf_newfspec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:22:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 11:53:10 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:53:18 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Functions heres are for manage t_fspec types.
 ** new_fspec return a pointer to an initialized t_fspec. It uses malloc to     -
 ** allocate an address to it. That mean when a t_fspec isn't needed anymore,   -
-** such address must be freed, here comes the destroy_fspec.
-** destroy_fspec anullates each data contained in each part of the structure,  -
-** then free the pointer and do not return.
+** such address must be freed.
 */
 
-t_fspec	*new_fspec(void)
-{
-	t_fspec	*new
+#include <ft_printf.h>
 
-	new->= malloc(sizeof(t_fspec));
+t_fspec	*pf_newfspec(void)
+{
+	t_fspec	*new;
+
+	new = malloc(sizeof(t_fspec));
 	new->init = false;
 	new->align = '\0';
 	new->fill = '\0';
@@ -31,15 +30,4 @@ t_fspec	*new_fspec(void)
 	new->format = '\0';
 	new->output = NULL;
 	return (new);
-}
-
-void	del_fspec(t_fspec **del)
-{
-	*del->init = 0;
-	*del->align = 0;
-	*del->fill = 0;
-	*del->spaces = 0;
-	*del->format = 0;
-	*del->output = NULL;
-	free(*del);
 }

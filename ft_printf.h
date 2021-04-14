@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 11:53:12 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:52:39 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_fspec
 int		ft_printf(const char *string, ...);
 char	*pf_parser(va_list args, t_fspec *type);
 char	*pf_textformat(t_fspec *type, char *data);
-t_fspec	*new_fspec(void);
-void	del_fspec(t_fspec **del);
+t_fspec	*pf_newfspec(void);
+void	pf_delfspec(t_fspec **del);
 
 #endif

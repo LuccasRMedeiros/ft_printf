@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 11:19:41 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:33:05 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char		*pf_textformat(t_fspec *type, char *data)
 	if (!ret)
 		return (NULL);
 	if (!type->align)
-		pf_alignleft(type, data, &ret);
+		alignleft(type, data, &ret);
 	else
-		pf_alignright(type, data, &ret);
+		alignright(type, data, &ret);
 	return (ret);
 }

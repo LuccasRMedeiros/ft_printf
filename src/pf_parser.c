@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 11:16:59 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:00:17 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char *pointer_parser(long int arg)
 	return (ret);
 }
 
-char		pf_parser(va_list args, t_fspec *type)
+char		*pf_parser(va_list args, t_fspec *type)
 {
 	char	*ret;
 
@@ -78,5 +78,7 @@ char		pf_parser(va_list args, t_fspec *type)
 		ret = ft_dtox(va_arg(args, unsigned int), true);
 	else if (type->format == 'X')
 		ret = ft_dtox(va_arg(args, unsigned int), false);
+	else
+		ret = char_parser(type->format);
 	return (ret);
 }
