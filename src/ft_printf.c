@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/14 11:41:16 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:19:24 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,29 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static int		flagid(char c)
+static int		status(char c)
 {
-	if (ft_strhvchr(c, P_CONVS))
+	if (ft_strhvchr(c, P_FLAGS))
+		return (0);
+	else if (ft_strhvchr(c, P_WIDTH))
 		return (1);
-	else if (ft_strhvchr(c, P_ALIGN))
+	else if (ft_strhvchr(c, P_PRESC))
 		return (2);
-	else if (ft_strhvchr(c, P_FILLR))
+	else if (ft_strhvchr(c, P_LNGTH))
 		return (3);
-	else if (c == '.')
+	else if (ft_strhvchr(c, P_SPECS))
 		return (4);
-	return (0);
-}
+	return (-1);
 
 static size_t	type_check(t_fspec **type, const char *string)
 {
+	int		status;
 	size_t	i;
-	size_t	fillers;
 	t_fspec	*aux;
 
+	status = 0;
 	i = 0;
-	fillers = 0;
 	aux = *type;
-	while (!aux->format)
-	{
-		if (flagid(string[i]) == 1)
-			aux->format = string[i];
-		else if (flagid(string[i]) == 2 && (!aux->fill && !aux->align))
-			aux->align = string[i];
-		else if (flagid(string[i]) == 3 && (!aux->precision))
-			aux->filler[fillers++] = string[i];
-		else if (flagid(string[i]) == 4 && (!aux->precision))
-			aux->precision = true;
-		else
-
-			
-	}
-	return (i);
 }
 
 int				ft_printf(const char *string, ...)
