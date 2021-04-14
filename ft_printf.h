@@ -43,6 +43,7 @@ typedef struct	s_fspec
 	bool	precision;
 	int		length;
 	char	specifier;
+	size_t	size;
 }				t_fspec;
 
 int		ft_printf(const char *string, ...);

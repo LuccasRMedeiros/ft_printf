@@ -64,21 +64,21 @@ char		*pf_parser(va_list args, t_fspec *type)
 	char	*ret;
 
 	ret = NULL;
-	if (type->format == 'c')
+	if (type->specifier == 'c')
 		ret = char_parser(va_arg(args, int));
-	else if (type->format == 'd' || type->format == 'i')
+	else if (type->specifier == 'd' || type->specifier == 'i')
 		ret = ft_itoa(va_arg(args, int));
-	else if (type->format == 's')
+	else if (type->specifier == 's')
 		ret = ft_strdup(va_arg(args, char*));
-	else if (type->format == 'u')
+	else if (type->specifier == 'u')
 		ret = ft_utoa(va_arg(args, unsigned int));
-	else if (type->format == 'p')
+	else if (type->specifier == 'p')
 		ret = pointer_parser(va_arg(args, unsigned long int));
-	else if (type->format == 'x')
+	else if (type->specifier == 'x')
 		ret = ft_dtox(va_arg(args, unsigned int), true);
-	else if (type->format == 'X')
+	else if (type->specifier == 'X')
 		ret = ft_dtox(va_arg(args, unsigned int), false);
-	else
-		ret = char_parser(type->format);
+	else if (type->specifier == '%')
+		ret = char_parser(type->specifier);
 	return (ret);
 }

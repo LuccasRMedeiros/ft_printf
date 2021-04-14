@@ -64,13 +64,14 @@ static void	alignright(t_fspec *type, char *data, char **ret)
 	*ret[i] = '\0';
 }
 
-char		*pf_textformat(t_fspec *type, char *data)
+char		*pf_textformat(t_fspec **type, char *data)
 {
 	char	*ret;
+	t_fspec	*aux;
 
-	if (ft_strlen(data) > type->spaces)
+	if (ft_strlen(data) > type->width)
 		return (data);
-	ret = malloc(sizeof(char) * (type->spaces + 1));
+	ret = malloc(sizeof(char) * (type->width + 1));
 	if (!ret)
 		return (NULL);
 	if (!type->align)

@@ -21,29 +21,52 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static int		status(char c)
+static int		status_updt(char c, int prev)
 {
-	if (ft_strhvchr(c, P_FLAGS))
+	if (ft_strhvchr(c, P_FLAGS) && !(prev > 0))
 		return (0);
-	else if (ft_strhvchr(c, P_WIDTH))
+	else if (ft_strhvchr(c, P_WIDTH) && !(prev > 1))
 		return (1);
-	else if (ft_strhvchr(c, P_PRESC))
+	else if (ft_strhvchr(c, P_PRESC) && !(prev >= 2))
 		return (2);
-	else if (ft_strhvchr(c, P_LNGTH))
+	else if (ft_strhvchr(c, P_LNGTH) && !(prev > 3))
 		return (3);
-	else if (ft_strhvchr(c, P_SPECS))
+	else if (ft_strhvchr(c, P_SPECS) && !(prev > 4))
 		return (4);
 	return (-1);
+}
 
-static size_t	type_check(t_fspec **type, const char *string)
+static size_t	type_set(t_fspec **type, const char *string, va_list args)
 {
 	int		status;
 	size_t	i;
 	t_fspec	*aux;
 
-	status = 0;
+	status = status_updt(string[0], 0);
 	i = 0;
 	aux = *type;
+	while (status != 4 && status != -1)
+	{
+		if (status = 0)
+			aux->flags[i] = string[i];
+		else if (status = 1)
+			aux->width = string[i] == '*' ? va_arg(args, int) : ft_atoi(string + i);
+		else if (status = 2)
+			aux->presc = true;
+		else if (status = 3)
+			aux->length = ft_atoi(string + i);
+		else if (status = 4)
+			aux->spec = string[i];
+		else if (status = -1)
+		{
+			while (ft_isalpha(string[i]) == 0)
+				i++;
+			return (i);
+		}
+		i++;
+		status = status_updt(string[i], status);
+	}
+	return (i);
 }
 
 int				ft_printf(const char *string, ...)
