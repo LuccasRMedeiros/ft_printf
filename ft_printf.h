@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 08:38:10 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 11:56:38 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define P_WIDTH "123456789*"
 # define P_PRESC "."
 # define P_SPECS "cspdiuxX%"
+# define S_NUM "pdiuxX"
+# define S_ALP "cs%"
 
 typedef struct	s_fspec
 {

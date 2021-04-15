@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 09:01:37 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 11:58:30 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,52 @@ static void	alignleft(t_fspec *type, char *data, char **ret)
 	*ret[i] = '\0';
 }
 
-static void	alignright(t_fspec *type, char *data, char **ret)
+static void	alignright(t_fspec *type, char **ret)
 {
 	size_t	i;
-	size_t	dt_len;
 	size_t	dt_i;
+	char	f;
 
 	i = 0;
-	dt_len = ft_strlen(data);
 	dt_i = 0;
-	while (i <= type->spaces - dt_len)
+	f = ft_strhvchr('0',type->flags) ? '0' : ' ';
+	while (i < type->width - type->size)
 	{
-		*ret[i] = type->fill;
-		i++;
+		*ret[i] = f;
+		++i;
 	}
-	while (i <= type->spaces)
+	while (i < type->length)
 	{
-		*ret[i] = data[dt_i];
-		i++;
-		dt_i++;
+		*ret[i] = type->data[dt_i];
+		++i;
+		++dt_i;
 	}
 	*ret[i] = '\0';
+}
+
+static char	*numeric(t_fspec *type)
+{
+	size_t	len;
+	char	*num;
+
+	len = type->width + type->length;
+	type->size = type->size > len ? type->size : len;
+	num = malloc(sizeof *num * type->size + 1);
+	if (!num)
+		return (NULL);
+}
+
+static char	*alpha(char *alp)
+{
+	alp = NULL;
+	return (NULL);
 }
 
 char		*pf_textformat(t_fspec *type)
 {
 	char *ret;
 
+	ret = NULL;
+	type->init = false;
+	return (NULL);
 }
