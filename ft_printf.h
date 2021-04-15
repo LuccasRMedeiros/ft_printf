@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/14 21:48:15 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 08:38:10 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define P_FLAGS "-0"
 # define P_WIDTH "123456789*"
 # define P_PRESC "."
-# define P_LNGTH "123456789"
 # define P_SPECS "cspdiuxX%"
 
 typedef struct	s_fspec
@@ -44,6 +43,7 @@ typedef struct	s_fspec
 	bool	precision;
 	int		length;
 	char	specifier;
+	char	*data;
 	size_t	size;
 }				t_fspec;
 

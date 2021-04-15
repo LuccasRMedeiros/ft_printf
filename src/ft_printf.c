@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 00:03:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 08:57:14 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,54 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static f_type	*set_type(char c, f_spec *type)
+static int		ft_atoi_t_adv(char **string)
 {
-	if (ft_strhvchr(c, P_FLAGS) && !(ft_strhvchr(c, type->flags)))
-		type->flags[ft_strlen(type->flags)] = c;
-	if (ft_strhvchr(c, P_WIDTH) && !(type->precision))
-		type->width = c == * ? c : ft_atoi(&c);
-	if (c == '.')
-		type->precision = true;
-	if (ft_strhvchr(c, P_LNGTH))
-		type->length = ft_atoi(&c);
-	if (ft_strhvchr(c, P_SPECS))
+	int	acc;
+
+	acc = 0;
+	while (ft_isdigit(**string) && **string)
 	{
-		type->init = false;
-		type->specifier = c;
+		acc = (len * 10) + ft_atoi(&**string);
+		**++string;
 	}
-	return (type);
+	return (acc);
+}
+
+static f_type	*set_type(char **string, va_list args)
+{
+	f_type *ret;
+
+	ret = pf_newfspec();
+	while (ret->init && **string)
+	{
+		if (ft_strhvchr(c, P_FLAGS) && !(ft_strhvchr(c, ret->flags)))
+			ret->flags[ft_strlen(ret->flags)] = c;
+		else if (ft_strhvchr(c, P_WIDTH) && !(ret->precision))
+			ret->width = c == * ? va_arg(args, int) : ft_atoi_t_adv(&*string);
+		else if (c == '.')
+			ret->precision = true;
+		else if (ft_strhvchr(c, P_WIDTH))
+			ret->width = c == * ? va_arg(args, int) : ft_atoi_t_adv(&*string);
+		else if (ft_strhvchr(c, P_SPECS))
+		{
+			ret->init = false;
+			ret->specifier = c;
+		}
+		**++string;
+	}
+	ret->data = pf_parser(args, ret);
+	ret->length = ft_strlen(type->data);
+	return (ret);
+}
+
+static void		printf_type(t_fspec *type)
+{
+	char *print;
+
+	print = pf_textformat(type);
+	if (!print)
+		return ;
+	ft_putstr_fd(print, 1);
 }
 
 int				ft_printf(const char *string, ...)
@@ -46,14 +78,17 @@ int				ft_printf(const char *string, ...)
 	t_fspec	*type;
 
 	cnt = 0;
-	type = pf_newfspec();
 	va_start(args, string);
+	type = NULL;
 	while (*string)
 	{
 		if (*string == '%')
-			type->init = true;
-		if (type->init)
-			type = set_type(*string, type);
+		{
+			type = set_type(&string, type);
+			printf_type(type);
+			cnt += type->size;
+			pf_delfspec(&type);
+		}
 		else
 		{
 			ft_putchar_fd(*string, 1);
@@ -62,6 +97,5 @@ int				ft_printf(const char *string, ...)
 		*++string;
 	}
 	va_end(args);
-	pf_delfspec(&type);
 	return (cnt);
 }

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 20:33:05 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 09:01:37 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,8 @@ static void	alignright(t_fspec *type, char *data, char **ret)
 	*ret[i] = '\0';
 }
 
-char		*pf_textformat(t_fspec **type, char *data)
+char		*pf_textformat(t_fspec *type)
 {
-	char	*ret;
-	t_fspec	*aux;
+	char *ret;
 
-	if (ft_strlen(data) > type->width)
-		return (data);
-	ret = malloc(sizeof(char) * (type->width + 1));
-	if (!ret)
-		return (NULL);
-	if (!type->align)
-		alignleft(type, data, &ret);
-	else
-		alignright(type, data, &ret);
-	return (ret);
 }
