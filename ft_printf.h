@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/14 17:45:21 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/14 21:48:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 
 typedef struct	s_fspec
 {
+	bool	init;
 	char	*flags;
 	int		width;
 	bool	precision;
