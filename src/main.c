@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 23:35:28 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 00:05:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 */
 
 #include <ft_printf.h>
-#include <stdio.h>
 
 int	main(void)
 {
@@ -26,7 +25,7 @@ int	main(void)
 	int				pf_ret;
 	
 	phrase = "Let's see and compare:%s %% %d\e[0;32mend\e[0m\n\n";
-	test = "ok!"
+	test = "ok!";
 	test1 = 200;
 	ret = ft_printf(phrase, test, test1);
 	pf_ret = printf(phrase, test, test1);

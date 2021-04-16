@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 23:32:01 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 00:01:42 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	alignleft(size_t sz, size_t ln, char f, char *dt, char **ret)
 		*ret[--sz] = ' ';
 		if (sz == ln)
 			while (sz > 0)
-				*ret[--sz] = ln == 0 ? f : data[--ln];
+				*ret[--sz] = ln == 0 ? f : dt[--ln];
 	}
 }
 
@@ -44,11 +44,11 @@ static void	alignright(size_t sz, size_t ln, char f, char *dt, char **ret)
 	size_t	ds;
 
 	i = 0;
-	ds = ft_strlen(data);
+	ds = ft_strlen(dt);
 	*ret[sz] = '\0';
 	while (sz > 0)
 	{
-		*ret[--sz] = ds > 0 ? data[--ds] : f;
+		*ret[--sz] = ds > 0 ? dt[--ds] : f;
 		--ln;
 		if (ln == 0)
 			while (sz > 0)
@@ -65,10 +65,10 @@ char		*pf_textformat(t_fspec *tp)
 	ret = malloc(sizeof *ret * tp->sz + 1);
 	if (!ret)
 		return (NULL);
-	fill = ft_strhvchr(tp->fs, &'0') ? '0' : ' ';
-	if (ft_strhvchr(ft_strhvchr(tp->fs, '-')))
+	fill = ft_strhvchr(tp->fs, "0") ? '0' : ' ';
+	if (ft_strhvchr(tp->fs, "-"))
 		alignleft(tp->sz, tp->w, fill, tp->dt, &ret);
 	else
-		alignleft(tp->sz, tp->w, fill, tp->dt, &ret);
+		alignright(tp->sz, tp->w, fill, tp->dt, &ret);
 	return (ret);
 }
