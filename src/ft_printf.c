@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 16:26:21 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:16:38 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int					ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
+			++str;
 			type = pf_settype(str, args);
 			printf_type(type);
 			cnt += type->sz;

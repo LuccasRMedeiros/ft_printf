@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:22:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 16:26:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:46:31 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ t_fspec	*pf_newfspec(void)
 	if (!new)
 		return (NULL);
 	new->init = true;
-	new->fs = NULL;
+	new->fs = "";
 	new->w = 0;
 	new->p = false;
 	new->l = 0;
 	new->s = '\0';
-	new->dt = NULL;
+	new->dt = "";
 	new->sz = 0;
 	return (new);
 }

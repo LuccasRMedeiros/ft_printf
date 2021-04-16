@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 17:07:58 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:19:45 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		wildcard(t_fspec **ret, unsigned int arg)
 		p_ret->w = p_ret->w != 0 ? 0 : arg;
 }
 
-static int		atoi_thn_adv(t_fspec **ret, char *str)
+static int		atoi_thn_adv(t_fspec **ret, const char *str)
 {
 	t_fspec *p_ret;
 	size_t	sz;
@@ -64,26 +64,27 @@ static int		atoi_thn_adv(t_fspec **ret, char *str)
 t_fspec			*pf_settype(const char *str, va_list args)
 {
 	t_fspec *ret;
-	char	*s_aux;
+	size_t	i;
 
 	ret = pf_newfspec();
-	s_aux = (char*)str;
-	while (*s_aux)
+	i = 0;
+	printf("\n");
+	while (str[i] && ret->init)
 	{
-		if (ft_strhvchr(P_FLAGS, &*s_aux) && !(ft_strhvchr(ret->fs, &*s_aux)))
-			ret->fs[ft_strlen(ret->fs)] = *s_aux;
-		else if (*s_aux == '*')
+		if (ft_strhvchr(P_FLAGS, &str[i]) && !(ft_strhvchr(ret->fs, &str[i])))
+			ret->fs[ft_strlen(ret->fs)] = str[i];
+		else if (str[i] == '*')
 			wildcard(&ret, va_arg(args, unsigned int));
-		else if (*s_aux == '.')
+		else if (str[i] == '.')
 			ret->p = true;
-		else if (ft_strhvchr(P_SIZES, &*s_aux))
-			s_aux += atoi_thn_adv(&ret, s_aux);
-		else if (ft_strhvchr(P_SPECS, &*s_aux))
+		else if (ft_strhvchr(P_SIZES, &str[i]))
+			str += atoi_thn_adv(&ret, str);
+		else if (ft_strhvchr(P_SPECS, &str[i]))
 		{
 			ret->init = false;
-			ret->s = *str;
+			ret->s = str[i];
 		}
-		++s_aux;
+		++i;
 	}
 	ret->dt = pf_parser(args, ret->s);
 	ret->sz = calc_size(ret->p, ret->w, ret->l, ret->s, ret->dt);
