@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 00:05:15 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 12:32:10 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # include <stdio.h>
 # include "./libs/libft/libft.h"
 
-# define P_FLAGS "-0"
+# define P_FLAGS "0-"
 # define P_SIZES "123456789*"
 # define P_SPECS "cspdiuxX%"
-# define S_NUM "pdiuxX"
-# define S_ALP "cs%"
+# define C_NUM "pdiuxX"
+# define C_ALP "cs%"
 
 typedef struct	s_fspec
 {
