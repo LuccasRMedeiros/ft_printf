@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 11:58:30 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:32:01 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,70 +23,52 @@
 
 #include <ft_printf.h>
 
-static void	alignleft(t_fspec *type, char *data, char **ret)
+static void	alignleft(size_t sz, size_t ln, char f, char *dt, char **ret)
 {
 	size_t	i;
 
 	i = 0;
-	while (i <= type->spaces && data[i])
+	*ret[sz] = '\0';
+	while (sz > 0)
 	{
-		*ret[i] = data[i];
-		i++;
+		*ret[--sz] = ' ';
+		if (sz == ln)
+			while (sz > 0)
+				*ret[--sz] = ln == 0 ? f : data[--ln];
 	}
-	while (i <= type->spaces)
-	{
-		*ret[i] = type->fill;
-		i++;
-	}
-	*ret[i] = '\0';
 }
 
-static void	alignright(t_fspec *type, char **ret)
+static void	alignright(size_t sz, size_t ln, char f, char *dt, char **ret)
 {
 	size_t	i;
-	size_t	dt_i;
-	char	f;
+	size_t	ds;
 
 	i = 0;
-	dt_i = 0;
-	f = ft_strhvchr('0',type->flags) ? '0' : ' ';
-	while (i < type->width - type->size)
+	ds = ft_strlen(data);
+	*ret[sz] = '\0';
+	while (sz > 0)
 	{
-		*ret[i] = f;
-		++i;
+		*ret[--sz] = ds > 0 ? data[--ds] : f;
+		--ln;
+		if (ln == 0)
+			while (sz > 0)
+				*ret[--sz] = ' ';
 	}
-	while (i < type->length)
-	{
-		*ret[i] = type->data[dt_i];
-		++i;
-		++dt_i;
-	}
-	*ret[i] = '\0';
 }
 
-static char	*numeric(t_fspec *type)
-{
-	size_t	len;
-	char	*num;
-
-	len = type->width + type->length;
-	type->size = type->size > len ? type->size : len;
-	num = malloc(sizeof *num * type->size + 1);
-	if (!num)
-		return (NULL);
-}
-
-static char	*alpha(char *alp)
-{
-	alp = NULL;
-	return (NULL);
-}
-
-char		*pf_textformat(t_fspec *type)
+char		*pf_textformat(t_fspec *tp)
 {
 	char *ret;
+	char fill;
 
 	ret = NULL;
-	type->init = false;
-	return (NULL);
+	ret = malloc(sizeof *ret * tp->sz + 1);
+	if (!ret)
+		return (NULL);
+	fill = ft_strhvchr(tp->fs, &'0') ? '0' : ' ';
+	if (ft_strhvchr(ft_strhvchr(tp->fs, '-')))
+		alignleft(tp->sz, tp->w, fill, tp->dt, &ret);
+	else
+		alignleft(tp->sz, tp->w, fill, tp->dt, &ret);
+	return (ret);
 }

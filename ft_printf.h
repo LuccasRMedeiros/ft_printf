@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 11:56:38 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:21:46 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,25 @@
 # include "./libs/libft/libft.h"
 
 # define P_FLAGS "-0"
-# define P_WIDTH "123456789*"
-# define P_PRESC "."
+# define P_SIZES "123456789*"
 # define P_SPECS "cspdiuxX%"
 # define S_NUM "pdiuxX"
 # define S_ALP "cs%"
+# define S_FLR "0"
 
 typedef struct	s_fspec
 {
 	bool	init;
-	char	*flags;
-	int		width;
-	bool	precision;
-	int		length;
-	char	specifier;
-	char	*data;
-	size_t	size;
+	char	*fs;
+	int		w;
+	bool	p;
+	int		l;
+	char	s;
+	char	*dt;
+	size_t	sz;
 }				t_fspec;
 
-int		ft_printf(const char *string, ...);
+int		ft_printf(const char *str, ...);
 char	*pf_parser(va_list args, t_fspec *type);
 char	*pf_textformat(t_fspec *type, char *data);
 t_fspec	*pf_newfspec(void);

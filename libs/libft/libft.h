@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:29:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/10 20:58:01 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 22:09:07 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ size_t				ft_intlen(int n);
 char				*ft_ltoa(long int n);
 char				*ft_ltox(unsigned long int dn, bool lowercase);
 char				*ft_utoa(unsigned int n);
-bool				ft_strhvchr(char c, const char *string);
+bool				ft_strhvchr(const char *string, const char *grp_c);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);

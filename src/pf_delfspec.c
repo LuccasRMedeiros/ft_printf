@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:40:58 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/14 23:30:57 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 22:28:08 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ void	pf_delfspec(t_fspec **fspec)
 
 	del = *fspec;
 	del->init = false;
-	del->flags = NULL;
-	del->width = 0;
-	del->precision = false;
-	del->length = 0;
-	del->specifier = '\0';
-	del->size = 0;
+	del->fs = NULL;
+	del->w = 0;
+	del->p = false;
+	del->l = 0;
+	del->s = '\0';
+	del->dt = NULL;
+	del->sz = 0;
 	free(del);
 }

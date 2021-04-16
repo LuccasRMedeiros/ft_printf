@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/13 22:00:17 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:13:59 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,26 @@ static char *pointer_parser(long int arg)
 	return (ret);
 }
 
-char		*pf_parser(va_list args, t_fspec *type)
+char		*pf_parser(va_list args, char s)
 {
 	char	*ret;
 
 	ret = NULL;
-	if (type->specifier == 'c')
+	if (s == 'c')
 		ret = char_parser(va_arg(args, int));
-	else if (type->specifier == 'd' || type->specifier == 'i')
+	else if (s == 'd' || s == 'i')
 		ret = ft_itoa(va_arg(args, int));
-	else if (type->specifier == 's')
+	else if (s == 's')
 		ret = ft_strdup(va_arg(args, char*));
-	else if (type->specifier == 'u')
+	else if (s == 'u')
 		ret = ft_utoa(va_arg(args, unsigned int));
-	else if (type->specifier == 'p')
+	else if (s == 'p')
 		ret = pointer_parser(va_arg(args, unsigned long int));
-	else if (type->specifier == 'x')
+	else if (s == 'x')
 		ret = ft_dtox(va_arg(args, unsigned int), true);
-	else if (type->specifier == 'X')
+	else if (s == 'X')
 		ret = ft_dtox(va_arg(args, unsigned int), false);
-	else if (type->specifier == '%')
-		ret = char_parser(type->specifier);
+	else if (s == '%')
+		ret = char_parser(s);
 	return (ret);
 }
