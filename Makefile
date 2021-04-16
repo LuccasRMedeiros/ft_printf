@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/14 10:38:06 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/16 16:27:58 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC =	ft_printf.c \
 		pf_delfspec.c \
 		pf_parser.c \
 		pf_textformat.c \
+		pf_settype.c \
 
 SRC_PATH = ./src
 
@@ -77,7 +78,7 @@ clean:
 fclean:
 	@echo "-- Removing everything of ft_printf"
 	@echo "NOTE: source code will be preserved"
-	@rm -f exec
+	@rm -f $(BIN)
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_PATH)
 	@$(MSG_DONE)

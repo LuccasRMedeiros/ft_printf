@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 12:32:10 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:26:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 static void			printf_type(t_fspec *type)
 {
-	printf("printf_type\n");
 	char *print;
 
 	print = pf_textformat(type);
@@ -41,13 +40,19 @@ int					ft_printf(const char *str, ...)
 
 	cnt = 0;
 	va_start(args, str);
-	type = pf_newfspec();
+	type = NULL;
 	while (*str)
 	{
 		if (*str == '%')
-			type->init = true;
-		else if (type->init)
-			str = set_type(str, type, args);
+		{
+			type = pf_settype(str, args);
+			printf_type(type);
+			cnt += type->sz;
+			str = ft_strchr(str, type->s);
+			pf_delfspec(&type);
+		}
+		else
+			ft_putchar_fd(*str, 1);
 		++str;
 	}
 	va_end(args);

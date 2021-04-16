@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 12:32:10 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:25:53 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ char	*pf_parser(va_list args, char s);
 char	*pf_textformat(t_fspec *tp);
 t_fspec	*pf_newfspec(void);
 void	pf_delfspec(t_fspec **del);
+t_fspec	*pf_settype(const char *str, va_list args);
 
 #endif
