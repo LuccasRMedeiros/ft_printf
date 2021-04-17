@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/15 23:13:59 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:43:58 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ char		*pf_parser(va_list args, char s)
 		ret = ft_dtox(va_arg(args, unsigned int), false);
 	else if (s == '%')
 		ret = char_parser(s);
+	else
+		return (NULL);
 	return (ret);
 }

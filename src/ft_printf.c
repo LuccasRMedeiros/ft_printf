@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 18:16:38 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 23:17:13 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int					ft_printf(const char *str, ...)
 			type = pf_settype(str, args);
 			printf_type(type);
 			cnt += type->sz;
-			str = ft_strchr(str, type->s);
+			str = ft_strchr(str, type->s) + 1;
 			pf_delfspec(&type);
 		}
-		else
 			ft_putchar_fd(*str, 1);
+		++cnt;
 		++str;
 	}
 	va_end(args);

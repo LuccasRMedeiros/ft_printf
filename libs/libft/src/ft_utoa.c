@@ -6,13 +6,13 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:41:40 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/09 18:12:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 23:37:25 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static size_t	ft_uintlen(unsigned int n)
+static size_t	uintlen(unsigned int n)
 {
 	size_t len;
 
@@ -25,12 +25,10 @@ static size_t	ft_uintlen(unsigned int n)
 	return (len);
 }
 
-static int		powerten(long int n)
+static int		powerten(size_t nlen)
 {
-	int	nlen;
 	int power;
 
-	nlen = ft_intlen(n);
 	power = 1;
 	while (nlen > 1)
 	{
@@ -43,22 +41,24 @@ static int		powerten(long int n)
 char			*ft_utoa(unsigned int n)
 {
 	unsigned long int	ln;
-	char				*itoa;
+	size_t				nlen;
+	char				*utoa;
 	int					i;
 	int					du;
 
 	ln = n;
-	itoa = malloc(sizeof(char) * (ft_uintlen(ln) + 1));
-	if (!itoa)
+	nlen = uintlen(ln);
+	utoa = malloc(sizeof(char) * (nlen + 1));
+	if (!utoa)
 		return (NULL);
 	i = 0;
-	du = powerten(ln);
+	du = powerten(nlen);
 	while (du > 0)
 	{
-		itoa[i++] = (ln / du) + 48;
+		utoa[i++] = (ln / du) + 48;
 		ln %= du;
 		du /= 10;
 	}
-	itoa[i] = '\0';
-	return (itoa);
+	utoa[i] = '\0';
+	return (utoa);
 }
