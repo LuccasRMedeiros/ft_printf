@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 19:49:53 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/16 21:28:42 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,16 @@ static void	alignright(size_t sz, size_t ln, char f, char *dt, char **ret)
 	{
 		if (ds > 0)
 			*ret[--sz] = dt[--ds];
-		else
-			*ret[--sz] = f;
-		if (ln == 0)
+		if (ds == 0)
+		{
+			while (ln > 0)
+			{
+				*ret[--sz] = f;
+				--ln;
+			}
 			while (sz > 0)
 				*ret[--sz] = ' ';
+		}
 	}
 }
 
@@ -64,7 +69,7 @@ char		*pf_textformat(t_fspec *tp)
 	char fill;
 
 	ret = NULL;
-	ret = ft_calloc(tp->sz + 1, sizeof *ret * tp->sz + 1);
+	ret = malloc(sizeof *ret * tp->sz + 1);
 	if (!ret)
 		return (NULL);
 	fill = ft_strhvchr(tp->fs, "0") ? '0' : ' ';
