@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 22:36:26 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 12:17:25 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,32 @@
 
 #include <ft_printf.h>
 
-static void	alignleft(size_t sz, size_t ln, char f, char *dt, char **ret)
+static char	*alignleft(size_t sz, size_t ln, char f, char *dt)
 {
-	size_t	i;
+	size_t	ds;
+	char	*ret;
 
-	i = 0;
-	*ret[sz] = '\0';
+	ds = ft_strlen(dt);
+	ret = malloc(sizeof *ret * sz);
+	if (!ret)
+		return (NULL);
+	ret[sz] = '\0';
 	while (sz > 0)
 	{
-		*ret[--sz] = ' ';
+		if (sz > ln)
+			ret[--sz] = ' ';
 		if (sz == ln)
-			while (sz > 0)
-				*ret[--sz] = ln == 0 ? f : dt[--ln];
+		{
+			while (ds > 0)
+				ret[--sz] = dt[--ds];
+			while (ln > 0)
+			{
+				ret[--sz] = f;
+				--ln;
+			}
+		}
 	}
+	return (ret);
 }
 
 static char	*alignright(size_t sz, size_t ln, char f, char *dt)
@@ -74,7 +87,7 @@ char		*pf_textformat(t_fspec *tp)
 	ret = NULL;
 	fill = ft_strhvchr(tp->fs, "0") ? '0' : ' ';
 	if (ft_strhvchr(tp->fs, "-"))
-		alignleft(tp->sz, tp->w, fill, tp->dt, &ret);
+		alignleft(tp->sz, tp->w, fill, tp->dt);
 	else
 		ret = alignright(tp->sz, tp->w, fill, tp->dt);
 	return (ret);

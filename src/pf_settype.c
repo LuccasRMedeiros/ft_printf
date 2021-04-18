@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 22:58:49 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 12:11:08 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,50 +40,53 @@ static void		wildcard(t_fspec **ret, unsigned int arg)
 		p_ret->w = p_ret->w != 0 ? 0 : arg;
 }
 
-static int		atoi_thn_adv(t_fspec **ret, const char *str)
+static char		*atoi_thn_adv(t_fspec **ret, const char *str)
 {
-	t_fspec *p_ret;
+	t_fspec	*p_ret;
 	size_t	sz;
-	int		i;
+	size_t	i;
+	char	str_c;
 
 	p_ret = *ret;
 	sz = 0;
 	i = 0;
+	str_c = '\0';
 	while (ft_isdigit(str[i]) && str[i])
 	{
-		sz = (sz * 10) + ft_atoi(&str[i]);
+		str_c = str[i];
+		sz = (sz * 10) + ft_atoi(&str_c);
 		++i;
 	}
 	if (p_ret->p)
 		p_ret->l = sz;
 	else
 		p_ret->w = sz;
-	return (i);
+	return ((char*)str + (i - 1));
 }
 
 t_fspec			*pf_settype(const char *str, va_list args)
 {
 	t_fspec *ret;
-	size_t	i;
+	char	str_c;
 
 	ret = pf_newfspec();
-	i = 0;
-	while (str[i] && ret->init)
+	str_c = '\0';
+	while (++str && ret->init)
 	{
-		if (ft_strhvchr(P_FLAGS, &str[i]) && !(ft_strhvchr(ret->fs, &str[i])))
-			ret->fs[ft_strlen(ret->fs)] = str[i];
-		else if (str[i] == '*')
+		str_c = *str;
+		if (ft_strhvchr(P_FLAGS, &str_c) && !(ft_strhvchr(ret->fs, &str_c)))
+			ret->fs[ft_strlen(ret->fs)] = str_c;
+		else if (str_c == '*')
 			wildcard(&ret, va_arg(args, unsigned int));
-		else if (str[i] == '.')
+		else if (str_c == '.')
 			ret->p = true;
-		else if (ft_strhvchr(P_SIZES, &str[i]))
-			str += atoi_thn_adv(&ret, str);
-		else if (ft_strhvchr(P_SPECS, &str[i]))
+		else if (ft_strhvchr(P_SIZES, &str_c))
+			str = atoi_thn_adv(&ret, str);
+		else if (ft_strhvchr(P_SPECS, &str_c))
 		{
 			ret->init = false;
-			ret->s = str[i];
+			ret->s = str_c;
 		}
-		++i;
 	}
 	ret->dt = pf_parser(args, ret->s);
 	ret->sz = calc_size(ret->p, ret->w, ret->l, ret->s, ret->dt);

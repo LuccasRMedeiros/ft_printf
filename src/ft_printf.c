@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/16 23:17:13 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 12:19:48 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void			printf_type(t_fspec *type)
 		return ;
 	ft_putstr_fd(print, 1);
 	free(print);
+	pf_delfspec(&type);
 }
 
 int					ft_printf(const char *str, ...)
@@ -45,15 +46,16 @@ int					ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			++str;
 			type = pf_settype(str, args);
 			printf_type(type);
 			cnt += type->sz;
 			str = ft_strchr(str, type->s) + 1;
-			pf_delfspec(&type);
 		}
+		else
+		{
 			ft_putchar_fd(*str, 1);
-		++cnt;
+			++cnt;
+		}
 		++str;
 	}
 	va_end(args);
