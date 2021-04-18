@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_delfspec.c                                      :+:      :+:    :+:   */
+/*   pf_alignleft.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 18:40:58 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/18 17:35:49 by lrocigno         ###   ########.fr       */
+/*   Created: 2021/04/18 17:08:21 by lrocigno          #+#    #+#             */
+/*   Updated: 2021/04/18 17:14:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** del_fspec anullates each data contained in each part of the structure, then -
-** free the pointer and do not return.
-*/
-
 #include <ft_printf.h>
 
-void	pf_delfspec(t_fspec **fspec)
+char	*pf_alignleft(size_t sz, size_t ln, char f, char *dt)
 {
-	t_fspec *del;
+	size_t	ds;
+	char	*ret;
 
-	del = *fspec;
-	del->init = false;
-	del->fs = '\0';
-	del->w = 0;
-	del->p = false;
-	del->l = 0;
-	del->s = '\0';
-	del->dt = NULL;
-	del->sz = 0;
-	free(del);
+	ds = ft_strlen(dt);
+	ret = malloc(sizeof *ret * sz);
+	if(!ret)
+		return (NULL);
+	ret[sz] = '\0';
+	while (sz > 0)
+	{
+		if (sz > ln)
+			ret[--sz] = ' ';
+		else if (sz == ln)
+		{
+			while (ds > 0)
+				ret[--sz] = dt[--ds];
+			ln = sz;
+			while (ln > 0)
+			{
+				ret[--sz] = f;
+				--ln;
+			}
+		}
+	}
+	return (ret);
 }

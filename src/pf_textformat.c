@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/18 12:17:25 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 19:23:43 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*alignleft(size_t sz, size_t ln, char f, char *dt)
 	size_t	ds;
 	char	*ret;
 
-	ds = ft_strlen(dt);
+	ds = ft_strlen(dt) < ln ? ft_strlen(dt) : ln;
 	ret = malloc(sizeof *ret * sz);
 	if (!ret)
 		return (NULL);
@@ -37,10 +37,11 @@ static char	*alignleft(size_t sz, size_t ln, char f, char *dt)
 	{
 		if (sz > ln)
 			ret[--sz] = ' ';
-		if (sz == ln)
+		else if (sz == ln)
 		{
 			while (ds > 0)
 				ret[--sz] = dt[--ds];
+			ln = sz;
 			while (ln > 0)
 			{
 				ret[--sz] = f;
@@ -56,16 +57,17 @@ static char	*alignright(size_t sz, size_t ln, char f, char *dt)
 	size_t	ds;
 	char	*ret;
 
-	ds = ft_strlen(dt);
+	ds = ft_strlen(dt) < ln ? ft_strlen(dt) : ln;
 	ret = malloc(sizeof *ret * sz);
 	if (!ret)
 		return (NULL);
 	ret[sz] = '\0';
 	while (sz > 0)
 	{
+		ln = sz - ds;
 		if (ds > 0)
 			ret[--sz] = dt[--ds];
-		if (ds == 0)
+		else if (ds == 0)
 		{
 			while (ln > 0)
 			{
@@ -85,10 +87,10 @@ char		*pf_textformat(t_fspec *tp)
 	char fill;
 
 	ret = NULL;
-	fill = ft_strhvchr(tp->fs, "0") ? '0' : ' ';
-	if (ft_strhvchr(tp->fs, "-"))
-		alignleft(tp->sz, tp->w, fill, tp->dt);
+	fill = tp->fs == '0' ? '0' : ' ';
+	if (tp->fs == '-')
+		ret = alignleft(tp->sz, tp->l, fill, tp->dt);
 	else
-		ret = alignright(tp->sz, tp->w, fill, tp->dt);
+		ret = alignright(tp->sz, tp->l, fill, tp->dt);
 	return (ret);
 }

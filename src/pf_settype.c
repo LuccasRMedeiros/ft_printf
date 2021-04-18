@@ -6,27 +6,21 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/18 12:11:08 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 18:20:03 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static size_t		calc_size(bool p, size_t w, size_t l, char s, char *dt)
+static void		calc_size(t_fspec **ret)
 {
-	size_t ret;
-	size_t dt_len;
+	t_fspec	*p_ret;
+	size_t 	dt_sz;
 
-	ret = 0;
-	dt_len = ft_strlen(dt);
-	if (ft_strhvchr(C_ALP, &s))
-		ret = p ? l : dt_len;
-	else if (ft_strhvchr(C_NUM, &s))
-		ret = p && l > dt_len ? l : dt_len;
-	else
-		ret = w;
-	ret = ret > w ? ret : w;
-	return (ret);
+	p_ret = *ret;
+	dt_sz = ft_strlen(p_ret->dt);
+	p_ret->l = p_ret->l > 0 ? p_ret->l : dt_sz;
+	p_ret->sz = p_ret->w > p_ret->l ? p_ret-> w : p_ret->l;
 }
 
 static void		wildcard(t_fspec **ret, unsigned int arg)
@@ -74,8 +68,8 @@ t_fspec			*pf_settype(const char *str, va_list args)
 	while (++str && ret->init)
 	{
 		str_c = *str;
-		if (ft_strhvchr(P_FLAGS, &str_c) && !(ft_strhvchr(ret->fs, &str_c)))
-			ret->fs[ft_strlen(ret->fs)] = str_c;
+		if (ft_strhvchr(P_FLAGS, &str_c) && !(ret->fs == '-'))
+			ret->fs = str_c;
 		else if (str_c == '*')
 			wildcard(&ret, va_arg(args, unsigned int));
 		else if (str_c == '.')
@@ -89,6 +83,6 @@ t_fspec			*pf_settype(const char *str, va_list args)
 		}
 	}
 	ret->dt = pf_parser(args, ret->s);
-	ret->sz = calc_size(ret->p, ret->w, ret->l, ret->s, ret->dt);
+	calc_size(&ret);
 	return (ret);
 }
