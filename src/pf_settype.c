@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/18 18:20:03 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 19:52:50 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void		calc_size(t_fspec **ret)
 
 	p_ret = *ret;
 	dt_sz = ft_strlen(p_ret->dt);
-	p_ret->l = p_ret->l > 0 ? p_ret->l : dt_sz;
+	if (ft_strhvchr(C_NUM, &p_ret->s))
+		p_ret->l = dt_sz > p_ret->l ? dt_sz : p_ret->l;
+	else
+		p_ret->l = p_ret->l > 0 ? p_ret->l : dt_sz;
 	p_ret->sz = p_ret->w > p_ret->l ? p_ret-> w : p_ret->l;
 }
 

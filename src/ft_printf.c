@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/18 17:45:41 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/18 20:46:58 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 **  terminal.
 ** Upon a succesfull execution, printf returns the amount of printed           -
 ** characters.
-** 
 */
 
 #include <ft_printf.h>
