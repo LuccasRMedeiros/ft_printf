@@ -6,7 +6,7 @@
 #    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/16 16:27:58 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/18 20:23:26 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ fclean:
 
 re: fclean all
 
-exec: all
+exec: re
 	@echo "-- Compiling executable"
 	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o $(BIN)
 	@$(MSG_DONE)

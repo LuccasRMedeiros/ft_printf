@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/18 19:23:43 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:19:28 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static char	*alignright(size_t sz, size_t ln, char f, char *dt)
 		{
 			while (ln > 0)
 			{
-				ret[--sz] = f;
+				ret[--sz] = '0';
 				--ln;
 			}
 			while (sz > 0)
-				ret[--sz] = ' ';
+				ret[--sz] = f;
 		}
 	}
 	return (ret);
