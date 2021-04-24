@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+         #
+#    By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/18 20:23:26 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/04/23 18:55:58 by lrocignoS        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-BIN = exectest
+BIN = debugf
 
 MSG_DONE = echo "-- Done!\n"
 
@@ -51,16 +51,16 @@ OBJ_PATH = ./out
 
 OBJ_FULL = $(addprefix $(OBJ_PATH)/, $(OBJ))
 
-makedeps:
-	@echo "-- Creating ft_printf dependencies"
-	@make -C $(LIBS_DIR) all
-	@mkdir -p $(OBJ_PATH)
-
 $(NAME): makedeps $(OBJ_FULL)
 	@echo "-- Creating static library FTPRINTF"
 	@cp $(LIBS_DIR)/$(LIBS) ./$(NAME)
 	@$(ARCHV) $(NAME) $(OBJ_FULL)
 	@$(MSG_DONE)
+
+makedeps:
+	@echo "-- Creating ft_printf dependencies"
+	@make -C $(LIBS_DIR) all
+	@mkdir -p $(OBJ_PATH)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@echo "-- Compiling $@"
@@ -86,10 +86,11 @@ fclean:
 
 re: fclean all
 
-exec: re
-	@echo "-- Compiling executable"
+debug: FLAGS += -g
+
+debug: re
+	@echo "-- Compiling debugger executable file"
 	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o $(BIN)
 	@$(MSG_DONE)
-	@./$(BIN)
 
 .PHONY: all clean fclean re exec makedeps

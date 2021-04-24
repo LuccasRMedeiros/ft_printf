@@ -6,17 +6,17 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 13:07:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/06 14:07:56 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/23 10:45:45 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <stdio.h>
 
-static int		powerten(long int n)
+static int	powerten(long int n)
 {
-	int nlen;
-	int power;
+	int	nlen;
+	int	power;
 
 	nlen = ft_intlen(n);
 	power = 1;
@@ -28,7 +28,7 @@ static int		powerten(long int n)
 	return (power);
 }
 
-void			ft_putnbr_fd(int *n, int fd)
+void	ft_putnbr_fd(int *n, int fd)
 {
 	long int	ln;
 	int			i;

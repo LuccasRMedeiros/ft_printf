@@ -32,21 +32,22 @@ static size_t	lhex_len(unsigned long int dn)
 	return (len);
 }
 
-char			*ft_ltox(unsigned long int dn, bool lowercase)
+char	*ft_ltox(unsigned long int dn)
 {
 	size_t	len;
 	char	dgt;
 	char	*hex;
 
 	len = lhex_len(dn);
-	if (!(hex = (char*)malloc(sizeof(char) * len)))
+	hex = malloc(sizeof(char) * len);
+	if (!hex)
 		return (NULL);
 	hex[len] = 0;
 	while (len--)
 	{
 		dgt = dn % 16;
 		if (dgt > 9 && dgt < 16)
-			dgt = lowercase ? dgt + 87: dgt + 55;
+			dgt += 55;
 		else
 			dgt += 48;
 		hex[len] = dgt;

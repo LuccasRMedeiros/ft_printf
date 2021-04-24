@@ -23,14 +23,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	stti = (size_t)start;
 	subi = 0;
-	alloc = (ft_strlen(s) <= len ? ft_strlen(s) : len);
-	if (!(sub = malloc(sizeof(char) * alloc + 1)))
+	alloc = ft_strlen(s);
+	if (alloc > len)
+		alloc = len;
+	sub = calloc((alloc + 1), sizeof(char) * alloc + 1);
+	if (!sub)
 		return (NULL);
 	if (start >= ft_strlen(s))
-	{
-		ft_bzero(sub, ft_strlen(s));
 		return (sub);
-	}
 	while (subi < len && s[stti])
 	{
 		sub[subi] = s[stti];

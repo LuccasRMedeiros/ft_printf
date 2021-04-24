@@ -18,8 +18,8 @@ int	ft_memcmp(const void *str1, const void *str2, size_t n)
 	unsigned char	*aux2;
 	size_t			i;
 
-	aux1 = (unsigned char*)str1;
-	aux2 = (unsigned char*)str2;
+	aux1 = (unsigned char *)str1;
+	aux2 = (unsigned char *)str2;
 	i = 0;
 	while (i < n)
 	{

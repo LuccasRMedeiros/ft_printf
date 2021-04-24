@@ -12,10 +12,10 @@
 
 #include <libft.h>
 
-static int		powerten(long int n)
+static int	powerten(long int n)
 {
 	int	nlen;
-	int power;
+	int	power;
 
 	nlen = ft_intlen(n);
 	power = 1;
@@ -27,7 +27,7 @@ static int		powerten(long int n)
 	return (power);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long int	ln;
 	char		*itoa;

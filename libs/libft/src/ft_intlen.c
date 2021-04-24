@@ -14,7 +14,7 @@
 
 size_t	ft_intlen(int n)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (n)

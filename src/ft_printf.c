@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
+/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/19 11:09:45 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:46:32 by lrocignoS        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 #include <ft_printf.h>
 
-static void			printf_type(t_fspec *type)
+static void	printf_type(t_fspec *type)
 {
-	char *print;
+	char	*print;
 
 	print = pf_textformat(type);
 	if (!print)
@@ -32,7 +32,7 @@ static void			printf_type(t_fspec *type)
 	pf_delfspec(&type);
 }
 
-int					ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	size_t	cnt;
 	va_list	args;
@@ -46,15 +46,7 @@ int					ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			type = pf_settype(str, args);
-			//printf("\ntype\n");
-			//printf(" -- fs:\t|%c|\n", type->fs);
-			//printf(" -- w:\t|%zu|\n", type->w);
-			//printf(" -- p:\t|%d|\n", type->p);
-			//printf(" -- l:\t|%zu|\n", type->l);
-			//printf(" -- s:\t|%c|\n", type->s);
-			//printf(" -- dt:\t|%s|\n", type->dt);
-			//printf(" -- sz:\t|%zu|\n", type->sz);
-			cnt += type->sz;
+			cnt += type->w;
 			str = ft_strchr(str + 1, type->s);
 			printf_type(type);
 		}

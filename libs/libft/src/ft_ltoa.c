@@ -14,7 +14,7 @@
 
 static size_t	ft_lintlen(long int n)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (n)
@@ -25,10 +25,10 @@ static size_t	ft_lintlen(long int n)
 	return (len);
 }
 
-static int		powerten(long long int n)
+static int	powerten(long long int n)
 {
 	int	nlen;
-	int power;
+	int	power;
 
 	nlen = ft_lintlen(n);
 	power = 1;
@@ -40,7 +40,7 @@ static int		powerten(long long int n)
 	return (power);
 }
 
-char			*ft_ltoa(long int ln)
+char	*ft_ltoa(long int ln)
 {
 	long long int	lln;
 	char			*ltoa;

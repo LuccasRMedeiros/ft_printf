@@ -24,12 +24,10 @@
 
 #include <ft_printf.h>
 
-static char *char_parser(char arg)
+static char	*char_parser(char arg)
 {
-	size_t	i;
 	char	*ret;
 
-	i = 0;
 	ret = malloc(sizeof(char) + 1);
 	if (!ret)
 		return (NULL);
@@ -38,28 +36,50 @@ static char *char_parser(char arg)
 	return (ret);
 }
 
-static char *pointer_parser(long int arg)
+static char	*pointer_parser(long int arg)
 {
-	char *hex;
-	char *ret;
+	char	*hex;
+	char	*ret;
+	size_t	i;
 
-	hex = ft_ltox(arg, true);
+	hex = ft_ltox(arg);
 	if (!hex)
 		return (NULL);
 	ret = ft_strdup("0x");
+	i = 0;
 	if (!ret)
 	{
 		free(hex);
 		return (NULL);
 	}
 	ret = ft_reallocncat(ret, hex);
+	while (ret[i])
+	{
+		ret[i] = ft_tolower(ret[i]);
+		++i;
+	}
 	free(hex);
 	if (!ret)
 		return (NULL);
 	return (ret);
 }
 
-char		*pf_parser(va_list args, char s)
+static char	*lower_hxd(unsigned int dec)
+{
+	char	*ret;
+	size_t	i;
+
+	ret = ft_dtox(dec);
+	i = 0;
+	while (ret[i])
+	{
+		ret[i] = ft_tolower(ret[i]);
+		++i;
+	}
+	return (ret);
+}
+
+char	*pf_parser(va_list args, char s)
 {
 	char	*ret;
 
@@ -69,15 +89,15 @@ char		*pf_parser(va_list args, char s)
 	else if (s == 'd' || s == 'i')
 		ret = ft_itoa(va_arg(args, int));
 	else if (s == 's')
-		ret = ft_strdup(va_arg(args, char*));
+		ret = ft_strdup(va_arg(args, char *));
 	else if (s == 'u')
 		ret = ft_utoa(va_arg(args, unsigned int));
 	else if (s == 'p')
 		ret = pointer_parser(va_arg(args, unsigned long int));
 	else if (s == 'x')
-		ret = ft_dtox(va_arg(args, unsigned int), true);
+		ret = lower_hxd(va_arg(args, unsigned int));
 	else if (s == 'X')
-		ret = ft_dtox(va_arg(args, unsigned int), false);
+		ret = ft_dtox(va_arg(args, unsigned int));
 	else if (s == '%')
 		ret = char_parser(s);
 	else

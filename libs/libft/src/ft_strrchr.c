@@ -14,18 +14,16 @@
 
 char	*ft_strrchr(const char *str, int c)
 {
-	unsigned char	*str_aux;
 	unsigned char	find;
 	int				i;
 
-	str_aux = (unsigned char*)str;
 	find = (unsigned char)c;
 	i = ft_strlen(str);
 	while (i >= 0)
 	{
 		if (str[i] == find)
 		{
-			return ((char*)str + i);
+			return ((char *)str + i);
 		}
 		i--;
 	}

@@ -14,7 +14,7 @@
 
 static size_t	uintlen(unsigned int n)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (n)
@@ -25,9 +25,9 @@ static size_t	uintlen(unsigned int n)
 	return (len);
 }
 
-static int		powerten(size_t nlen)
+static int	powerten(size_t nlen)
 {
-	int power;
+	int	power;
 
 	power = 1;
 	while (nlen > 1)
@@ -38,7 +38,7 @@ static int		powerten(size_t nlen)
 	return (power);
 }
 
-char			*ft_utoa(unsigned int n)
+char	*ft_utoa(unsigned int n)
 {
 	unsigned long int	ln;
 	size_t				nlen;

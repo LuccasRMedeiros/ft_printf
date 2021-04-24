@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-static int		ft_haschar(const char *str, char c)
+static int	ft_haschar(const char *str, char c)
 {
 	size_t	i;
 
@@ -28,7 +28,7 @@ static int		ft_haschar(const char *str, char c)
 	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		stt;
 	int		end;
@@ -44,7 +44,8 @@ char			*ft_strtrim(char const *s1, char const *set)
 	while (end > stt && ft_haschar(set, s1[end]))
 		end--;
 	i = 0;
-	if (!(trim = malloc(sizeof(char) * (end - stt + 2))))
+	trim = malloc(sizeof(char) * (end - stt + 2));
+	if (!trim)
 		return (NULL);
 	while (stt <= end)
 	{

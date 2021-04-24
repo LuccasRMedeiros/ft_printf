@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pf_textformat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/24 17:28:13 by lrocignoS        ###   ########.fr       */
+/*   Updated: 2021/04/19 11:19:28 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,64 +23,74 @@
 
 #include <ft_printf.h>
 
-static char	*alignleft(size_t wd, size_t ln, size_t sz, char *dt)
+static char	*alignleft(size_t sz, size_t ln, char f, char *dt)
 {
+	size_t	ds;
 	char	*ret;
 
-	ret = ft_calloc(wd, sizeof *ret * wd);
+	ds = ft_strlen(dt) < ln ? ft_strlen(dt) : ln;
+	ret = malloc(sizeof *ret * sz);
 	if (!ret)
 		return (NULL);
-	while (wd > 0)
+	ret[sz] = '\0';
+	while (sz > 0)
 	{
-		if (wd > ln + sz)
-			ret[--wd] = ' ';
-		else if (wd == ln + sz)
+		if (sz > ln)
+			ret[--sz] = ' ';
+		else if (sz == ln)
 		{
+			while (ds > 0)
+				ret[--sz] = dt[--ds];
+			ln = sz;
+			while (ln > 0)
+			{
+				ret[--sz] = f;
+				--ln;
+			}
+		}
+	}
+	return (ret);
+}
+
+static char	*alignright(size_t sz, size_t ln, char f, char *dt)
+{
+	size_t	ds;
+	char	*ret;
+
+	ds = ft_strlen(dt) < ln ? ft_strlen(dt) : ln;
+	ret = malloc(sizeof *ret * sz);
+	if (!ret)
+		return (NULL);
+	ret[sz] = '\0';
+	while (sz > 0)
+	{
+		ln = sz - ds;
+		if (ds > 0)
+			ret[--sz] = dt[--ds];
+		else if (ds == 0)
+		{
+			while (ln > 0)
+			{
+				ret[--sz] = '0';
+				--ln;
+			}
 			while (sz > 0)
-				ret[--wd] = dt[--sz];
-			while (ln > 0)
-			{
-				ret[--wd] = '0';
-				--ln;
-			}
+				ret[--sz] = f;
 		}
 	}
 	return (ret);
 }
 
-static char	*alignright(size_t wd, size_t ln, size_t sz, char *dt)
-{
-	char	*ret;
-
-	ret = ft_calloc(wd, sizeof *ret * wd);
-	if (!ret)
-		return (NULL);
-	while (wd > 0)
-	{
-		if (sz > 0)
-			ret[--wd] = dt[--sz];
-		else if (sz == 0)
-		{
-			while (ln > 0)
-			{
-				ret[--wd] = '0';
-				--ln;
-			}
-			while (wd > 0)
-				ret[--wd] = ' ';
-		}
-	}
-	return (ret);
-}
-
-char	*pf_textformat(t_fspec *tp)
+char		*pf_textformat(t_fspec *tp)
 {
 	char *ret;
+	char fill;
 
 	ret = NULL;
+	fill = tp->fs == '0' ? '0' : ' ';
 	if (tp->fs == '-')
-		ret = alignleft(tp->w, tp->l, tp->sz, tp->dt);
+		ret = alignleft(tp->sz, tp->l, fill, tp->dt);
 	else
-		ret = alignright(tp->w, tp->l, tp->sz, tp->dt);
+		ret = alignright(tp->sz, tp->l, fill, tp->dt);
 	return (ret);
 }

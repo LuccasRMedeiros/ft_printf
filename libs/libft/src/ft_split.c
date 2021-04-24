@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-static void		ft_error(char **split, int len, size_t *wise)
+static void	ft_error(char **split, int len, size_t *wise)
 {
 	while (len >= 0)
 	{
@@ -46,14 +46,25 @@ static size_t	count_strs(char const *str, char c)
 	return (cnt);
 }
 
-static size_t	*wise(char const *path, char truth, int stars)
+static size_t	enlightment(char const *path, char truth, int questions)
+{
+	static size_t	answers;
+
+	answers = questions;
+	while (path[answers] != truth && path[answers] != '\0')
+		answers++;
+	return (answers);
+}
+
+static size_t	*wise(char const *path, char truth, size_t stars)
 {
 	size_t	*wisdom;
 	size_t	questions;
 	size_t	answers;
 	size_t	reflections;
 
-	if (!(wisdom = ft_calloc((stars * 2), sizeof(int*))))
+	wisdom = ft_calloc((stars * 2), sizeof(int *));
+	if (!wisdom)
 		return (NULL);
 	questions = 0;
 	answers = 0;
@@ -64,9 +75,7 @@ static size_t	*wise(char const *path, char truth, int stars)
 			questions++;
 		else if (path[questions] != truth)
 		{
-			answers = questions;
-			while (path[answers] != truth && path[answers] != '\0')
-				answers++;
+			answers = enlightment(path, truth, questions);
 			wisdom[reflections++] = questions;
 			wisdom[reflections++] = answers;
 			questions = answers;
@@ -75,21 +84,20 @@ static size_t	*wise(char const *path, char truth, int stars)
 	return (wisdom);
 }
 
-char			**ft_split(char const *str, char c)
+char	**ft_split(char const *str, char c)
 {
 	char	**split;
-	size_t	n_strs;
 	size_t	i;
 	size_t	*dl;
 
 	if (!str)
 		return (NULL);
-	n_strs = count_strs(str, c);
 	i = 0;
-	dl = wise(str, c, n_strs);
-	if (!(split = malloc(sizeof(char**) * (n_strs + 1))))
+	dl = wise(str, c, count_strs(str, c));
+	split = malloc(sizeof(char **) * (count_strs(str, c) + 1));
+	if (!split)
 		return (NULL);
-	while (i < n_strs)
+	while (i < count_strs(str, c))
 	{
 		split[i] = ft_substr(str, dl[i + i], (dl[i + i + 1] - dl[i + i]));
 		if (!(split[i]))

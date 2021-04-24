@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *str, const char *sub, size_t n)
 	ih = 0;
 	in = 0;
 	if (!(*sub))
-		return ((char*)str);
+		return ((char *)str);
 	while (str[ih] != '\0' && ih < n)
 	{
 		if (str[ih] == sub[0])
@@ -30,7 +30,7 @@ char	*ft_strnstr(const char *str, const char *sub, size_t n)
 				ih++;
 				in++;
 				if (sub[in] == '\0')
-					return ((char*)str + (ih - in));
+					return ((char *)str + (ih - in));
 			}
 			ih = (ih - in);
 			in = 0;

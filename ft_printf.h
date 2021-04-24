@@ -37,7 +37,7 @@
 # define C_NUM "pdiuxX"
 # define C_ALP "cs%"
 
-typedef struct	s_fspec
+typedef struct s_fspec
 {
 	bool	init;
 	char	fs;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
+/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/19 11:18:31 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:59:12 by lrocignoS        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 int	main(void)
 {
-	int				ret;
-	int				pf_ret;
-	char			*phrase;
-	char			*stest;
-	int				ntest;
+	int		ret;
+	int		pf_ret;
+	char	*phrase;
+	char	*stest;
+	int		ntest;
 
-	phrase = "Let's see and compare: %015.7d %-s %%\e[0;32mend\e[0m\n";
+	phrase = "%-015.7d %-.19s %%\e[0;32mend\e[0m\n";
 	stest = "ok!";
 	ntest = 9831;
 	ret = ft_printf(phrase, ntest, stest);
