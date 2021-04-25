@@ -25,13 +25,14 @@ t_fspec	*pf_newfspec(void)
 	new = malloc(sizeof *new);
 	if (!new)
 			return (NULL);
+	printf("\nnew address:\t|%p|\n", new);
 	new->init = true;
 	new->fs = '\0';
 	new->w = 0;
 	new->p = false;
 	new->l = 0;
 	new->s = '\0';
-	new->dt = malloc(sizeof(char));
+	new->dt = NULL;
 	new->sz = 0;
 	return (new);
 }

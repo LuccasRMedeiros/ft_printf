@@ -19,10 +19,9 @@
 
 void	pf_delfspec(t_fspec **fspec)
 {
-	t_fspec *del;
+	t_fspec	*del;
 
 	del = *fspec;
-	free(del);
 	del->init = false;
 	del->fs = '\0';
 	del->w = 0;
@@ -30,6 +29,6 @@ void	pf_delfspec(t_fspec **fspec)
 	del->l = 0;
 	del->s = '\0';
 	del->dt = NULL;
-	free(del->dt);
 	del->sz = 0;
+	free(del);
 }

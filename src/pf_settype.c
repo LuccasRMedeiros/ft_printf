@@ -109,7 +109,7 @@ t_fspec	*pf_settype(const char *str, va_list args)
 			ret->s = str_c;
 		}
 	}
-	ret->dt = pf_parser(args, ret->s);
+	pf_parser(&ret, args);
 	calc_size(&ret);
 	return (ret);
 }

@@ -79,28 +79,29 @@ static char	*lower_hxd(unsigned int dec)
 	return (ret);
 }
 
-char	*pf_parser(va_list args, char s)
+void	pf_parser(t_fspec **tp, va_list args)
 {
-	char	*ret;
+	t_fspec	*p_tp;
+	char	*pars;
 
-	ret = NULL;
-	if (s == 'c')
-		ret = char_parser(va_arg(args, int));
-	else if (s == 'd' || s == 'i')
-		ret = ft_itoa(va_arg(args, int));
-	else if (s == 's')
-		ret = ft_strdup(va_arg(args, char *));
-	else if (s == 'u')
-		ret = ft_utoa(va_arg(args, unsigned int));
-	else if (s == 'p')
-		ret = pointer_parser(va_arg(args, unsigned long int));
-	else if (s == 'x')
-		ret = lower_hxd(va_arg(args, unsigned int));
-	else if (s == 'X')
-		ret = ft_dtox(va_arg(args, unsigned int));
-	else if (s == '%')
-		ret = char_parser(s);
-	else
-		return (NULL);
-	return (ret);
+	p_tp = *tp;
+	pars = NULL;
+	if (p_tp->s == 'c')
+		pars = char_parser(va_arg(args, int));
+	else if (p_tp->s == 'd' || p_tp->s == 'i')
+		pars = ft_itoa(va_arg(args, int));
+	else if (p_tp->s == 's')
+		pars = ft_strdup(va_arg(args, char *));
+	else if (p_tp->s == 'u')
+		pars = ft_utoa(va_arg(args, unsigned int));
+	else if (p_tp->s == 'p')
+		pars = pointer_parser(va_arg(args, unsigned long int));
+	else if (p_tp->s == 'x')
+		pars = lower_hxd(va_arg(args, unsigned int));
+	else if (p_tp->s == 'X')
+		pars = ft_dtox(va_arg(args, unsigned int));
+	else if (p_tp->s == '%')
+		pars = char_parser(p_tp->s);
+	p_tp->dt = pars;
+	free(pars);
 }

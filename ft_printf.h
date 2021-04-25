@@ -50,7 +50,7 @@ typedef struct s_fspec
 }				t_fspec;
 
 int		ft_printf(const char *str, ...);
-char	*pf_parser(va_list args, char s);
+void	pf_parser(t_fspec **tp, va_list args);
 char	*pf_textformat(t_fspec *tp);
 t_fspec	*pf_newfspec(void);
 void	pf_delfspec(t_fspec **del);
