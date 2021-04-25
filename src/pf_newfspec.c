@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:22:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/19 11:13:01 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/25 10:37:39 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_fspec	*pf_newfspec(void)
 	new = malloc(sizeof *new);
 	if (!new)
 			return (NULL);
-	printf("\nnew address:\t|%p|\n", new);
 	new->init = true;
 	new->fs = '\0';
 	new->w = 0;
