@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pf_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
+/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/19 10:55:24 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/25 10:43:05 by lrocignoS        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,4 @@ void	pf_parser(t_fspec **tp, va_list args)
 	else if (p_tp->s == '%')
 		pars = char_parser(p_tp->s);
 	p_tp->dt = pars;
-	free(pars);
 }

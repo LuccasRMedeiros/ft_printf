@@ -20,8 +20,11 @@
 void	pf_delfspec(t_fspec **fspec)
 {
 	t_fspec	*del;
+	char	*dt;
 
 	del = *fspec;
+	dt = del->dt;
+	free(dt);
 	del->init = false;
 	del->fs = '\0';
 	del->w = 0;
