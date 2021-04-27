@@ -26,6 +26,8 @@ LIBS = libft.a \
 
 LIBS_DIR = ./libs/libft
 
+LIBS_RULE = all
+
 HEADERS = ft_printf.h \
 		  libft.h \
 
@@ -57,9 +59,9 @@ $(NAME): makedeps $(OBJ_FULL)
 	@$(ARCHV) $(NAME) $(OBJ_FULL)
 	@$(MSG_DONE)
 
-makedeps:
+makedeps: 
 	@echo "-- Creating ft_printf dependencies"
-	@make -C $(LIBS_DIR) all
+	@make -C $(LIBS_DIR) $(LIBS_RULE)
 	@mkdir -p $(OBJ_PATH)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
@@ -87,6 +89,8 @@ fclean:
 re: fclean all
 
 debug: FLAGS += -g
+
+debug: LIBS_RULE = debug
 
 debug: re
 	@echo "-- Compiling debugger executable file"

@@ -27,7 +27,7 @@ static char	*alignleft(size_t wd, size_t ln, size_t sz, char *dt)
 {
 	char	*ret;
 
-	ret = ft_calloc(wd, sizeof *ret * wd);
+	ret = ft_calloc(wd + 1, sizeof *ret);
 	if (!ret)
 		return (NULL);
 	while (wd > 0)
@@ -52,7 +52,7 @@ static char	*alignright(size_t wd, size_t ln, size_t sz, char *dt)
 {
 	char	*ret;
 
-	ret = ft_calloc(wd, sizeof *ret * wd);
+	ret = ft_calloc(wd + 1, sizeof *ret);
 	if (!ret)
 		return (NULL);
 	while (wd > 0)
