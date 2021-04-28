@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/25 11:53:43 by lrocignoS        ###   ########.fr       */
+/*   Updated: 2021/04/28 14:30:27 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,28 @@
 
 #include <ft_printf.h>
 
-static void	printf_type(t_fspec *type)
+static int	printf_type(t_fspec *type)
 {
 	char	*print;
+	size_t	p_sz;
 
 	print = pf_textformat(type);
 	if (!print)
-		return ;
-	ft_putstr_fd(print, 1);
+		return (0);
+	p_sz = 0;
+	while (p_sz < type->w)
+	{
+		ft_putchar_fd(print[p_sz], 1);
+		++p_sz;
+	}
 	free(print);
 	pf_delfspec(&type);
+	return (p_sz);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	size_t	cnt;
+	int		cnt;
 	va_list	args;
 	t_fspec	*type;
 
@@ -46,9 +53,8 @@ int	ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			type = pf_settype(str, args);
-			cnt += type->w;
 			str = ft_strchr(str + 1, type->s);
-			printf_type(type);
+			cnt += printf_type(type);
 		}
 		else
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/25 14:05:45 by lrocignoS        ###   ########.fr       */
+/*   Updated: 2021/04/28 18:23:32 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,13 @@
 
 int	main(void)
 {
-	int		ret;
 	int		pf_ret;
+	int		ret;
 	char	*phrase;
-	//char	*stest;
-	int		ntest;
 
-	phrase = "%c:\t|%-*d|\n";
-	//stest = "ok!";
-	ntest = 9831;
-	ret = ft_printf(phrase, 'f', 19, ntest);
-	pf_ret = printf(phrase, 'o', 19, ntest);
+	phrase = " %10p %-10p \n";
+	ret = ft_printf(phrase, 0, 0);
+	pf_ret = printf(phrase, 0, 0);
 	printf("Return of ft_printf: \e[1;33m%d\e[0m\n", ret);
 	printf("Return of printf: \e[1;33m%d\e[0m\n", pf_ret);
 	return (0);

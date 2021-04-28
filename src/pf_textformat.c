@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pf_textformat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/25 10:42:50 by lrocignoS        ###   ########.fr       */
+/*   Updated: 2021/04/28 15:15:01 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 #include <ft_printf.h>
 
-static char	*alignleft(size_t wd, size_t ln, size_t sz, char *dt)
+static char	*alignleft(size_t wd, size_t ln, size_t sz, char fill, char *dt)
 {
 	char	*ret;
 
@@ -40,7 +40,7 @@ static char	*alignleft(size_t wd, size_t ln, size_t sz, char *dt)
 				ret[--wd] = dt[--sz];
 			while (ln > 0)
 			{
-				ret[--wd] = '0';
+				ret[--wd] = fill;
 				--ln;
 			}
 		}
@@ -48,7 +48,7 @@ static char	*alignleft(size_t wd, size_t ln, size_t sz, char *dt)
 	return (ret);
 }
 
-static char	*alignright(size_t wd, size_t ln, size_t sz, char *dt)
+static char	*alignright(size_t wd, size_t ln, size_t sz, char fill, char *dt)
 {
 	char	*ret;
 
@@ -63,7 +63,7 @@ static char	*alignright(size_t wd, size_t ln, size_t sz, char *dt)
 		{
 			while (ln > 0)
 			{
-				ret[--wd] = '0';
+				ret[--wd] = fill;
 				--ln;
 			}
 			while (wd > 0)
@@ -75,12 +75,16 @@ static char	*alignright(size_t wd, size_t ln, size_t sz, char *dt)
 
 char	*pf_textformat(t_fspec *tp)
 {
-	char *ret;
+	char	*ret;
+	char	fill;
 
 	ret = NULL;
+	fill = '0';
+	if (tp->s == 's')
+		fill = ' ';
 	if (tp->fs == '-')
-		ret = alignleft(tp->w, tp->l, tp->sz, tp->dt);
+		ret = alignleft(tp->w, tp->l, tp->sz, fill, tp->dt);
 	else
-		ret = alignright(tp->w, tp->l, tp->sz, tp->dt);
+		ret = alignright(tp->w, tp->l, tp->sz, fill, tp->dt);
 	return (ret);
 }

@@ -94,7 +94,7 @@ debug: LIBS_RULE = debug
 
 debug: re
 	@echo "-- Compiling debugger executable file"
-	@$(CC) $(FLAGS) $(INCLUDES) $(SRC_PATH)/main.c -L. -lftprintf -o $(BIN)
+	@$(CC) $(FLAGS) $(INCLUDES) main.c -L. -lftprintf -o $(BIN)
 	@$(MSG_DONE)
 
 .PHONY: all clean fclean re exec makedeps
