@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/28 12:38:27 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:30:19 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,23 @@ static char	*lower_hxd(unsigned int dec)
 	return (ret);
 }
 
+static char	*string_parser(char *str)
+{
+	char	*ret;
+
+	if (!str)
+	{
+		ret = ft_strdup("(null)");
+		if (!ret)
+			return (NULL);
+		return (ret);
+	}
+	ret = ft_strdup(str);
+	if (!ret)
+		return (NULL);
+	return (ret);
+}
+
 void	pf_parser(t_fspec **tp, va_list args)
 {
 	t_fspec	*p_tp;
@@ -91,7 +108,7 @@ void	pf_parser(t_fspec **tp, va_list args)
 	else if (p_tp->s == 'd' || p_tp->s == 'i')
 		pars = ft_itoa(va_arg(args, int));
 	else if (p_tp->s == 's')
-		pars = ft_strdup(va_arg(args, char *));
+		pars = string_parser(va_arg(args, char *));
 	else if (p_tp->s == 'u')
 		pars = ft_utoa(va_arg(args, unsigned int));
 	else if (p_tp->s == 'p')
