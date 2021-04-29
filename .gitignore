@@ -2,7 +2,6 @@
 *.o
 a.out
 exec
-*.swp
 printfTester/
 out/
 debugf*

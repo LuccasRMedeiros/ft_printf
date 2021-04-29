@@ -23,7 +23,7 @@
 
 #include <ft_printf.h>
 
-static char	*alignleft(size_t wd, size_t ln, size_t sz, char fill, char *dt)
+static char	*alignleft(size_t wd, size_t sz, char *dt)
 {
 	char	*ret;
 
@@ -32,23 +32,18 @@ static char	*alignleft(size_t wd, size_t ln, size_t sz, char fill, char *dt)
 		return (NULL);
 	while (wd > 0)
 	{
-		if (wd > ln + sz)
+		if (wd > sz)
 			ret[--wd] = ' ';
-		else if (wd == ln + sz)
+		else if (wd == sz)
 		{
 			while (sz > 0)
 				ret[--wd] = dt[--sz];
-			while (ln > 0)
-			{
-				ret[--wd] = fill;
-				--ln;
-			}
 		}
 	}
 	return (ret);
 }
 
-static char	*alignright(size_t wd, size_t ln, size_t sz, char fill, char *dt)
+static char	*alignright(size_t wd, size_t sz, char *dt)
 {
 	char	*ret;
 
@@ -61,11 +56,6 @@ static char	*alignright(size_t wd, size_t ln, size_t sz, char fill, char *dt)
 			ret[--wd] = dt[--sz];
 		else if (sz == 0)
 		{
-			while (ln > 0)
-			{
-				ret[--wd] = fill;
-				--ln;
-			}
 			while (wd > 0)
 				ret[--wd] = ' ';
 		}
@@ -76,15 +66,11 @@ static char	*alignright(size_t wd, size_t ln, size_t sz, char fill, char *dt)
 char	*pf_textformat(t_fspec *tp)
 {
 	char	*ret;
-	char	fill;
 
 	ret = NULL;
-	fill = '0';
-	if (tp->s == 's')
-		fill = ' ';
 	if (tp->fs == '-')
-		ret = alignleft(tp->w, tp->l, tp->sz, fill, tp->dt);
+		ret = alignleft(tp->w, tp->sz, tp->dt);
 	else
-		ret = alignright(tp->w, tp->l, tp->sz, fill, tp->dt);
+		ret = alignright(tp->w, tp->sz, tp->dt);
 	return (ret);
 }

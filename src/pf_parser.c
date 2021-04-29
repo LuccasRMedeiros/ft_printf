@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/28 20:30:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:38:35 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ static char	*lower_hxd(unsigned int dec)
 	return (ret);
 }
 
-static char	*string_parser(char *str)
+static char	*string_parser(char *str, size_t l, bool p)
 {
 	char	*ret;
+	size_t	str_sz;
 
 	if (!str)
 	{
@@ -90,9 +91,14 @@ static char	*string_parser(char *str)
 			return (NULL);
 		return (ret);
 	}
-	ret = ft_strdup(str);
+	str_sz = ft_strlen(str);
+	if (p && l < str_sz)
+		str_sz = l;
+	++str_sz;
+	ret = malloc(str_sz * sizeof *ret);
 	if (!ret)
 		return (NULL);
+	ft_strlcpy(ret, str, str_sz);
 	return (ret);
 }
 
@@ -106,11 +112,11 @@ void	pf_parser(t_fspec **tp, va_list args)
 	if (p_tp->s == 'c')
 		pars = char_parser(va_arg(args, int));
 	else if (p_tp->s == 'd' || p_tp->s == 'i')
-		pars = ft_itoa(va_arg(args, int));
+		pars = ft_itoa(va_arg(args, int), p_tp->l, 0);
 	else if (p_tp->s == 's')
-		pars = string_parser(va_arg(args, char *));
+		pars = string_parser(va_arg(args, char *), p_tp->l, p_tp->p);
 	else if (p_tp->s == 'u')
-		pars = ft_utoa(va_arg(args, unsigned int));
+		pars = ft_utoa(va_arg(args, unsigned int), p_tp->l, 0);
 	else if (p_tp->s == 'p')
 		pars = pointer_parser(va_arg(args, unsigned long int));
 	else if (p_tp->s == 'x')
