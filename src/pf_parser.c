@@ -112,11 +112,11 @@ void	pf_parser(t_fspec **tp, va_list args)
 	if (p_tp->s == 'c')
 		pars = char_parser(va_arg(args, int));
 	else if (p_tp->s == 'd' || p_tp->s == 'i')
-		pars = ft_itoa(va_arg(args, int), p_tp->l, 0);
+		pars = ft_itoa(va_arg(args, int), p_tp->p, p_tp->l, 0);
 	else if (p_tp->s == 's')
 		pars = string_parser(va_arg(args, char *), p_tp->l, p_tp->p);
 	else if (p_tp->s == 'u')
-		pars = ft_utoa(va_arg(args, unsigned int), p_tp->l, 0);
+		pars = ft_utoa(va_arg(args, unsigned int), p_tp->p, p_tp->l, 0);
 	else if (p_tp->s == 'p')
 		pars = pointer_parser(va_arg(args, unsigned long int));
 	else if (p_tp->s == 'x')

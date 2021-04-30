@@ -1,3 +1,7 @@
 [submodule "libs/libft"]
 	path = libs/libft
 	url = https://github.com/LuccasRMedeiros/libft.git
+[submodule "libft"]
+	branch = dev
+[submodule "Libft"]
+	branch = dev
