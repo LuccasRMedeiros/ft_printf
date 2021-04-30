@@ -40,42 +40,20 @@ static char	*pointer_parser(long int arg)
 {
 	char	*hex;
 	char	*ret;
-	size_t	i;
 
-	hex = ft_ltox(arg);
+	hex = ft_ltox(arg, LOW);
 	if (!hex)
 		return (NULL);
 	ret = ft_strdup("0x");
-	i = 0;
 	if (!ret)
 	{
 		free(hex);
 		return (NULL);
 	}
 	ret = ft_reallocncat(ret, hex);
-	while (ret[i])
-	{
-		ret[i] = ft_tolower(ret[i]);
-		++i;
-	}
 	free(hex);
 	if (!ret)
 		return (NULL);
-	return (ret);
-}
-
-static char	*lower_hxd(unsigned int dec)
-{
-	char	*ret;
-	size_t	i;
-
-	ret = ft_dtox(dec);
-	i = 0;
-	while (ret[i])
-	{
-		ret[i] = ft_tolower(ret[i]);
-		++i;
-	}
 	return (ret);
 }
 
@@ -109,20 +87,23 @@ void	pf_parser(t_fspec **tp, va_list args)
 
 	p_tp = *tp;
 	pars = NULL;
+	if ((p_tp->s == 'd' || p_tp->s == 'i' || p_tp->s == 'u') &&
+		   	(!p_tp->l && !p_tp->p))
+		p_tp->l = 1;
 	if (p_tp->s == 'c')
 		pars = char_parser(va_arg(args, int));
 	else if (p_tp->s == 'd' || p_tp->s == 'i')
-		pars = ft_itoa(va_arg(args, int), p_tp->p, p_tp->l, 0);
+		pars = ft_itoa(va_arg(args, int));
 	else if (p_tp->s == 's')
 		pars = string_parser(va_arg(args, char *), p_tp->l, p_tp->p);
 	else if (p_tp->s == 'u')
-		pars = ft_utoa(va_arg(args, unsigned int), p_tp->p, p_tp->l, 0);
+		pars = ft_utoa(va_arg(args, unsigned int));
 	else if (p_tp->s == 'p')
 		pars = pointer_parser(va_arg(args, unsigned long int));
 	else if (p_tp->s == 'x')
-		pars = lower_hxd(va_arg(args, unsigned int));
+		pars = ft_dtox(va_arg(args, unsigned int), LOW);
 	else if (p_tp->s == 'X')
-		pars = ft_dtox(va_arg(args, unsigned int));
+		pars = ft_dtox(va_arg(args, unsigned int), UPR);
 	else if (p_tp->s == '%')
 		pars = char_parser(p_tp->s);
 	p_tp->dt = pars;

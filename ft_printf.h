@@ -34,8 +34,6 @@
 # define P_FLAGS "0-"
 # define P_SIZES "123456789*"
 # define P_SPECS "cspdiuxX%"
-# define C_NUM "pdiuxX"
-# define C_ALP "cs%"
 
 typedef struct s_fspec
 {
