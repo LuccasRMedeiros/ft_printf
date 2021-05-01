@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 18:36:50 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:42:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	wildcard(t_fspec *ret, int arg)
 	if (ret->p)
 	{
 		if (ret->l > 0 || arg < 0)
+		{
 			ret->l = 0;
+			ret->p = false;
+		}
 		else
 			ret->l = arg;
 	}
