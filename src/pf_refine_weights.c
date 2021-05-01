@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:27:52 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 18:23:54 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 20:24:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	refwghts_unsdec(unsigned int arg, t_fspec *tp)
 {
 	if (tp->s == 'u')
 		tp->sz = ft_uintlen(arg);
-	else
+	else if (tp->s == 'x' || tp->s == 'X')
 		tp->sz = ft_hexlen(arg);
 	if (tp->fs == '0' && !tp->p && tp->w > tp->sz)
 		tp->l = tp->w - tp->sz;
@@ -79,5 +79,7 @@ void	pf_refine_weights(t_fspec *tp, va_list args)
 		refwghts_unsdec(va_arg(c_args, unsigned int), tp);
 	else if (tp->s == 's')
 		refwghts_string(va_arg(c_args, char *), tp);
+	else if (tp->s == 'c' || tp->s == '%')
+		tp->sz = 1;
 	va_end(c_args);
 }

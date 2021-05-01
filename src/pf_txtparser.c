@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 18:18:42 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 20:23:57 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@
 
 #include <ft_printf.h>
 
+static char	*percent_parser(t_fspec *tp)
+{
+	size_t	i;
+	size_t	wd;
+	char	*perc;
+	char	*ret;
+
+	i = 0;
+	wd = tp->w;
+	perc = ft_strdup("%");
+	ret = malloc(tp->w * sizeof(char));
+	if (!ret)
+		return (NULL);
+	while (tp->fs == '0' && wd)
+	{
+		ret[i] = '0';
+		--wd;
+		++i;
+	}
+	ft_strlcat(ret, perc, tp->sz + 1);
+	free(perc);
+	return (ret);
+}
+
 static char	*char_parser(char arg, t_fspec *tp)
 {
 	char	*ret;
@@ -31,7 +55,6 @@ static char	*char_parser(char arg, t_fspec *tp)
 	ret = malloc(sizeof(char) + 1);
 	if (!ret)
 		return (NULL);
-	tp->sz = 1;
 	if (!tp->w)
 		tp->w = 1;
 	ret[0] = arg;
@@ -95,6 +118,6 @@ char	*pf_txtparser(t_fspec *tp, va_list args)
 	else if (tp->s == 'p')
 		return (pointer_parser(va_arg(args, long unsigned int), tp));
 	else if (tp->s == '%')
-		return (char_parser('%', tp));
+		return (percent_parser(tp));
 	return (NULL);
 }
