@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 18:33:49 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:36:50 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static void	wildcard(t_fspec *ret, int arg)
 {
-	if (arg < 0)
-	{
-		ret->fs = '-';
-		arg *= -1;
-	}
 	if (ret->p)
 	{
 		if (ret->l > 0 || arg < 0)
@@ -28,6 +23,11 @@ static void	wildcard(t_fspec *ret, int arg)
 	}
 	else
 	{
+		if (arg < 0)
+		{
+			ret->fs = '-';
+			arg *= -1;
+		}
 		if (ret->w > 0)
 			ret->w = 0;
 		else
