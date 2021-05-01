@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:27:52 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 17:47:32 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:23:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void refwghts_string(char *arg, t_fspec *tp)
 {
 	tp->sz = ft_strlen(arg);
+	if (!arg)
+		tp->sz = 6;
 	if (tp->l > tp->sz)
 		tp->l = 0;
 	else if (tp->p && tp->l < tp->sz)
