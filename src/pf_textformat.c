@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 22:25:43 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/28 15:15:01 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:10:40 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,9 @@ static char	*alignright(size_t wd, size_t sz, char *dt)
 
 char	*pf_textformat(t_fspec *tp)
 {
-	char	*ret;
-
-	ret = NULL;
 	if (tp->fs == '-')
-		ret = alignleft(tp->w, tp->sz, tp->dt);
+		return (alignleft(tp->w, tp->sz, tp->dt));
 	else
-		ret = alignright(tp->w, tp->sz, tp->dt);
-	return (ret);
+		return (alignright(tp->w, tp->sz, tp->dt));
+	return (NULL);
 }

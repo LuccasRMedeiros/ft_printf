@@ -6,7 +6,7 @@
 #    By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/04/23 18:55:58 by lrocignoS        ###   ########.fr        #
+#    Updated: 2021/05/01 12:54:07 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,9 @@ INCLUDES = $(foreach i, $(INCLUDES_PATH), -I $(i))
 SRC =	ft_printf.c \
 		pf_newfspec.c \
 		pf_delfspec.c \
-		pf_parser.c \
+		pf_txtparser.c \
+		pf_numparser.c \
+		pf_refine_weights.c\
 		pf_textformat.c \
 		pf_settype.c \
 

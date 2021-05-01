@@ -6,60 +6,41 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/30 13:18:48 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:01:05 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static void	ref_wghts(t_fspec **ret)
+static void	wildcard(t_fspec *ret, int arg)
 {
-	t_fspec	*p_ret;
-
-	p_ret = *ret;
-	if (p_ret->s == 'c')
-		p_ret->sz = 1;
-	else
-		p_ret->sz = ft_strlen(p_ret->dt);
-	p_ret->l = 0;
-	if (p_ret->sz > p_ret->w)
-		p_ret->w = p_ret->sz;
-}
-
-static void	wildcard(t_fspec **ret, int arg)
-{
-	t_fspec *p_ret;
-
-	p_ret = *ret;
 	if (arg < 0)
 	{
-		p_ret->fs = '-';
+		ret->fs = '-';
 		arg *= -1;
 	}
-	if (p_ret->p)
+	if (ret->p)
 	{
-		if (p_ret->l > 0)
-			p_ret->l = 0;
+		if (ret->l > 0)
+			ret->l = 0;
 		else
-			p_ret->l = arg;
+			ret->l = arg;
 	}
 	else
 	{
-		if (p_ret->w > 0)
-			p_ret->w = 0;
+		if (ret->w > 0)
+			ret->w = 0;
 		else
-			p_ret->w = arg;
+			ret->w = arg;
 	}
 }
 
-static char	*atoi_thn_adv(t_fspec **ret, const char *str)
+static char	*atoi_thn_adv(t_fspec *ret, const char *str)
 {
-	t_fspec	*p_ret;
 	size_t	sz;
 	size_t	i;
 	char	str_c;
 
-	p_ret = *ret;
 	sz = 0;
 	i = 0;
 	str_c = '\0';
@@ -69,11 +50,20 @@ static char	*atoi_thn_adv(t_fspec **ret, const char *str)
 		sz = (sz * 10) + ft_atoi(&str_c);
 		++i;
 	}
-	if (p_ret->p)
-		p_ret->l = sz;
+	if (ret->p)
+		ret->l = sz;
 	else
-		p_ret->w = sz;
+		ret->w = sz;
 	return ((char*)str + (i - 1));
+}
+
+static char	*parser(t_fspec *tp, va_list args)
+{
+	if (ft_strhvchr(S_NUM, tp->s))
+		return (pf_numparser(tp, args));
+	else if (ft_strhvchr(S_ALP, tp->s))
+		return (pf_txtparser(tp, args));
+	return (NULL);
 }
 
 t_fspec	*pf_settype(const char *str, va_list args)
@@ -89,18 +79,18 @@ t_fspec	*pf_settype(const char *str, va_list args)
 		if (ft_strhvchr(P_FLAGS, str_c) && !(ret->fs == '-'))
 			ret->fs = str_c;
 		else if (str_c == '*')
-			wildcard(&ret, va_arg(args, int));
+			wildcard(ret, va_arg(args, int));
 		else if (str_c == '.')
 			ret->p = true;
 		else if (ft_strhvchr(P_SIZES, str_c))
-			str = atoi_thn_adv(&ret, str);
+			str = atoi_thn_adv(ret, str);
 		else if (ft_strhvchr(P_SPECS, str_c))
 		{
 			ret->init = false;
 			ret->s = str_c;
 		}
 	}
-	pf_parser(&ret, args);
-	ref_wghts(&ret);
+	pf_refine_weights(ret, args);
+	ret->dt = parser(ret, args);
 	return (ret);
 }

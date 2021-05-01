@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:40:58 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/19 11:14:59 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 11:26:51 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	pf_delfspec(t_fspec **fspec)
 	del->l = 0;
 	del->s = '\0';
 	del->dt = NULL;
+	del->sig = '\0';
 	del->sz = 0;
 	free(del);
 }

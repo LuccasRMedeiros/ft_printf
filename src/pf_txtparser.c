@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_parser.c                                        :+:      :+:    :+:   */
+/*   pf_txtparser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/04/29 19:38:35 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:34:35 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** pf_parser receives the va_list with arguments passed and the type which is  -
+** pf_txtparser receives the va_list with arguments passed and the type which is  -
 ** been printed, so it is able to choose what of its subfunctions fit better   -
 ** to convert such type into a string.
 ** *int_parser have a pointer to function parameter because it can work with   -
@@ -24,19 +24,22 @@
 
 #include <ft_printf.h>
 
-static char	*char_parser(char arg)
+static char	*char_parser(char arg, t_fspec *tp)
 {
 	char	*ret;
 
 	ret = malloc(sizeof(char) + 1);
 	if (!ret)
 		return (NULL);
+	tp->sz = 1;
+	if (!tp->w)
+		tp->w = 1;
 	ret[0] = arg;
 	ret[1] = '\0';
 	return (ret);
 }
 
-static char	*pointer_parser(long int arg)
+static char	*pointer_parser(long unsigned int arg, t_fspec *tp)
 {
 	char	*hex;
 	char	*ret;
@@ -54,13 +57,15 @@ static char	*pointer_parser(long int arg)
 	free(hex);
 	if (!ret)
 		return (NULL);
+	tp->sz = ft_strlen(ret);
+	if (tp->w < tp->sz)
+		tp->w = tp->sz;
 	return (ret);
 }
 
-static char	*string_parser(char *str, size_t l, bool p)
+static char	*string_parser(char *str, t_fspec *tp)
 {
 	char	*ret;
-	size_t	str_sz;
 
 	if (!str)
 	{
@@ -69,42 +74,22 @@ static char	*string_parser(char *str, size_t l, bool p)
 			return (NULL);
 		return (ret);
 	}
-	str_sz = ft_strlen(str);
-	if (p && l < str_sz)
-		str_sz = l;
-	++str_sz;
-	ret = malloc(str_sz * sizeof *ret);
+	ret = malloc((tp->sz + 1) * sizeof *ret);
 	if (!ret)
 		return (NULL);
-	ft_strlcpy(ret, str, str_sz);
+	ft_strlcpy(ret, str, tp->sz + 1);
 	return (ret);
 }
 
-void	pf_parser(t_fspec **tp, va_list args)
+char	*pf_txtparser(t_fspec *tp, va_list args)
 {
-	t_fspec	*p_tp;
-	char	*pars;
-
-	p_tp = *tp;
-	pars = NULL;
-	if ((p_tp->s == 'd' || p_tp->s == 'i' || p_tp->s == 'u') &&
-		   	(!p_tp->l && !p_tp->p))
-		p_tp->l = 1;
-	if (p_tp->s == 'c')
-		pars = char_parser(va_arg(args, int));
-	else if (p_tp->s == 'd' || p_tp->s == 'i')
-		pars = ft_itoa(va_arg(args, int));
-	else if (p_tp->s == 's')
-		pars = string_parser(va_arg(args, char *), p_tp->l, p_tp->p);
-	else if (p_tp->s == 'u')
-		pars = ft_utoa(va_arg(args, unsigned int));
-	else if (p_tp->s == 'p')
-		pars = pointer_parser(va_arg(args, unsigned long int));
-	else if (p_tp->s == 'x')
-		pars = ft_dtox(va_arg(args, unsigned int), LOW);
-	else if (p_tp->s == 'X')
-		pars = ft_dtox(va_arg(args, unsigned int), UPR);
-	else if (p_tp->s == '%')
-		pars = char_parser(p_tp->s);
-	p_tp->dt = pars;
+	if (tp->s == 'c')
+		return (char_parser(va_arg(args, int), tp));
+	else if (tp->s == 's')
+		return (string_parser(va_arg(args, char *), tp));
+	else if (tp->s == 'p')
+		return (pointer_parser(va_arg(args, long unsigned int), tp));
+	else if (tp->s == '%')
+		return (char_parser('%', tp));
+	return (NULL);
 }
