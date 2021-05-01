@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 17:40:39 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:01:26 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(void)
 	int		ret;
 	char	*phrase;
 
-	phrase = " %-.2u \n";
-	ret = ft_printf(phrase, 0);
-	pf_ret = printf(phrase, 0);
+	phrase = " %-9.1s \n";
+	ret = ft_printf(phrase, NULL);
+	pf_ret = printf(phrase, NULL);
 	printf("Return of ft_printf: \e[1;33m%d\e[0m\n", ret);
 	printf("Return of printf: \e[1;33m%d\e[0m\n", pf_ret);
 	return (0);

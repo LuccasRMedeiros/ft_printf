@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 18:11:08 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:18:42 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,22 @@ static char	*pointer_parser(long unsigned int arg, t_fspec *tp)
 static char	*string_parser(char *str, t_fspec *tp)
 {
 	char	*ret;
+	char	*str_null;
 
-	if (!str)
-	{
-		str = ft_strdup("(null)");
-		if (!str)
-			return (NULL);
-	}
+	str_null = NULL;
 	ret = malloc((tp->sz + 1) * sizeof *ret);
 	if (!ret)
 		return (NULL);
+	if (!str)
+	{
+		str_null = ft_strdup("(null)");
+		if (!str_null)
+			return (NULL);
+		ft_strlcpy(ret, str_null, tp->sz + 1);
+		free(str_null);
+		return (ret);
+
+	}
 	ft_strlcpy(ret, str, tp->sz + 1);
 	return (ret);
 }
