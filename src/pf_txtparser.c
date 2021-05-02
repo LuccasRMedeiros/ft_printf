@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 20:23:57 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 20:57:18 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static char	*percent_parser(t_fspec *tp)
 	i = 0;
 	wd = tp->w;
 	perc = ft_strdup("%");
-	ret = malloc(tp->w * sizeof(char));
+	ret = ft_calloc(tp->w, sizeof(char));
 	if (!ret)
 		return (NULL);
-	while (tp->fs == '0' && wd)
+	printf("\n");
+	while (tp->fs == '0' && --wd)
 	{
 		ret[i] = '0';
-		--wd;
 		++i;
 	}
-	ft_strlcat(ret, perc, tp->sz + 1);
+	ft_strlcat(ret, perc, tp->w + 1);
 	free(perc);
 	return (ret);
 }
