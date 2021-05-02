@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 23:45:50 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:09:41 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*char_parser(char arg, t_fspec *tp)
 	return (ret);
 }
 
-static char	*pointer_parser(long unsigned int arg, t_fspec *tp)
+static char	*pointer_parser(va_list args, t_fspec *tp)
 {
 	char	*hex;
 	char	*ret;
@@ -67,43 +67,48 @@ static char	*pointer_parser(long unsigned int arg, t_fspec *tp)
 	ret = ft_strdup("0x");
 	if (!ret)
 		return (NULL);
-	if (tp->p && (!arg && !tp->l))
+	if (tp->fs == '0')
 	{
-		tp->sz = 2;
-		if (tp->w < tp->sz)
-			tp->w = tp->sz;
-		return (ret);
+		tp->l -= 2;
+		tp->sz -= 2;
 	}
-	hex = ft_ltox(arg, LOW);
+	tp->sz += 2;
+	if (tp->w < tp->sz)
+		tp->w = tp->sz;
+	hex = pf_numparser(tp, args);
 	ret = ft_reallocncat(ret, hex);
 	free(hex);
 	if (!ret)
 		return (NULL);
-	tp->sz = ft_strlen(ret);
-	if (tp->w < tp->sz)
-		tp->w = tp->sz;
 	return (ret);
 }
 
 static char	*string_parser(char *str, t_fspec *tp)
 {
 	char	*ret;
+	char	*str_copy;
 	char	*str_null;
+	size_t	i;
 
-	str_null = NULL;
-	ret = malloc((tp->sz + 1) * sizeof *ret);
-	if (!ret)
-		return (NULL);
+	ret	= ft_calloc(tp->w + 1, sizeof(char));
+	str_copy = malloc((tp->sz + 1) * sizeof(char));
+	ft_strlcpy(str_copy, str, tp->sz + 1);
+	str_null = ft_strdup("(null)");
 	if (!str)
+		str = str_null;
+	i = 0;
+	if (tp->fs == '0')
 	{
-		str_null = ft_strdup("(null)");
-		if (!str_null)
-			return (NULL);
-		ft_strlcpy(ret, str_null, tp->sz + 1);
-		free(str_null);
-		return (ret);
+		while (i < tp->w - tp->sz)
+		{
+			ret[i] = '0';
+			++i;
+		}
+		tp->sz = tp->w;
 	}
-	ft_strlcpy(ret, str, tp->sz + 1);
+	ret = ft_reallocncat(ret, str);
+	free(str_copy);
+	free(str_null);
 	return (ret);
 }
 
@@ -114,7 +119,7 @@ char	*pf_txtparser(t_fspec *tp, va_list args)
 	else if (tp->s == 's')
 		return (string_parser(va_arg(args, char *), tp));
 	else if (tp->s == 'p')
-		return (pointer_parser(va_arg(args, long unsigned int), tp));
+		return (pointer_parser(args, tp));
 	else if (tp->s == '%')
 		return (percent_parser(tp));
 	return (NULL);
