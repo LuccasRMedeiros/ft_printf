@@ -6,18 +6,20 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:27:52 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 20:45:00 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:56:08 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-/*static void refwghts_percent(t_fspec *tp)
+static void refwghts_percent(t_fspec *tp)
 {
 	tp->sz = 1;
-	if (tp->fs == '0' && tp->w > 0)
+	if (!tp->w)
+		tp->w = 1;
+	else if (tp->fs == '0' && tp->w > 0)
 		tp->sz = tp->w;
-}*/
+}
 
 static void refwghts_string(char *arg, t_fspec *tp)
 {
@@ -86,9 +88,9 @@ void	pf_refine_weights(t_fspec *tp, va_list args)
 		refwghts_unsdec(va_arg(c_args, unsigned int), tp);
 	else if (tp->s == 's')
 		refwghts_string(va_arg(c_args, char *), tp);
-	else if (tp->s == 'c' || tp->s == '%')
+	else if (tp->s == 'c')
 		tp->sz = 1;
-	/*else if (tp->s == '%')
-		refwghts_percent(tp);*/
+	else if (tp->s == '%')
+		refwghts_percent(tp);
 	va_end(c_args);
 }

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 20:57:18 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 23:27:44 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,19 @@ static char	*percent_parser(t_fspec *tp)
 {
 	size_t	i;
 	size_t	wd;
-	char	*perc;
 	char	*ret;
 
 	i = 0;
 	wd = tp->w;
-	perc = ft_strdup("%");
-	ret = ft_calloc(tp->w, sizeof(char));
+	ret = ft_calloc(tp->sz + 1, sizeof(char));
 	if (!ret)
 		return (NULL);
-	printf("\n");
 	while (tp->fs == '0' && --wd)
 	{
 		ret[i] = '0';
 		++i;
 	}
-	ft_strlcat(ret, perc, tp->w + 1);
-	free(perc);
+	ret[i] = '%';
 	return (ret);
 }
 
@@ -67,15 +63,17 @@ static char	*pointer_parser(long unsigned int arg, t_fspec *tp)
 	char	*hex;
 	char	*ret;
 
-	hex = ft_ltox(arg, LOW);
-	if (!hex)
-		return (NULL);
 	ret = ft_strdup("0x");
 	if (!ret)
-	{
-		free(hex);
 		return (NULL);
+	if (tp->p && (!arg && !tp->l))
+	{
+		tp->sz = 2;
+		if (tp->w < tp->sz)
+			tp->w = tp->sz;
+		return (ret);
 	}
+	hex = ft_ltox(arg, LOW);
 	ret = ft_reallocncat(ret, hex);
 	free(hex);
 	if (!ret)
