@@ -6,12 +6,13 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 23:27:44 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 23:45:50 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** pf_txtparser receives the va_list with arguments passed and the type which is  -
+** pf_txtparser receives the va_list with arguments passed and the type which 
+** is  -
 ** been printed, so it is able to choose what of its subfunctions fit better   -
 ** to convert such type into a string.
 ** *int_parser have a pointer to function parameter because it can work with   -
@@ -101,7 +102,6 @@ static char	*string_parser(char *str, t_fspec *tp)
 		ft_strlcpy(ret, str_null, tp->sz + 1);
 		free(str_null);
 		return (ret);
-
 	}
 	ft_strlcpy(ret, str, tp->sz + 1);
 	return (ret);

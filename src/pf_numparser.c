@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:37 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 20:23:00 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 23:46:41 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	undec_parser(unsigned int arg, t_fspec *tp, char *ret)
 	free(utoa);
 }
 
-static void dec_parser(int arg, t_fspec *tp, char *ret)
+static void	dec_parser(int arg, t_fspec *tp, char *ret)
 {
 	size_t	i;
 	char	*itoa;
@@ -73,8 +73,8 @@ static void dec_parser(int arg, t_fspec *tp, char *ret)
 
 char	*pf_numparser(t_fspec *tp, va_list args)
 {
-	char *ret;
-	
+	char	*ret;
+
 	ret = ft_calloc(tp->sz + 1, sizeof *ret);
 	if (!ret)
 		return (NULL);

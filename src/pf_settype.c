@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 18:42:15 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 23:47:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*atoi_thn_adv(t_fspec *ret, const char *str)
 		ret->l = sz;
 	else
 		ret->w = sz;
-	return ((char*)str + (i - 1));
+	return ((char *)str + (i - 1));
 }
 
 static char	*parser(t_fspec *tp, va_list args)
@@ -71,7 +71,7 @@ static char	*parser(t_fspec *tp, va_list args)
 
 t_fspec	*pf_settype(const char *str, va_list args)
 {
-	t_fspec *ret;
+	t_fspec	*ret;
 	char	str_c;
 
 	ret = pf_newfspec();

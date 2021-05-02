@@ -6,13 +6,13 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:27:52 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/01 22:56:08 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/01 23:48:28 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static void refwghts_percent(t_fspec *tp)
+static void	refwghts_percent(t_fspec *tp)
 {
 	tp->sz = 1;
 	if (!tp->w)
@@ -21,7 +21,7 @@ static void refwghts_percent(t_fspec *tp)
 		tp->sz = tp->w;
 }
 
-static void refwghts_string(char *arg, t_fspec *tp)
+static void	refwghts_string(char *arg, t_fspec *tp)
 {
 	tp->sz = ft_strlen(arg);
 	if (!arg)
@@ -79,7 +79,7 @@ static void	refwghts_dec(int arg, t_fspec *tp)
 
 void	pf_refine_weights(t_fspec *tp, va_list args)
 {
-	va_list c_args;
+	va_list	c_args;
 
 	va_copy(c_args, args);
 	if (tp->s == 'd' || tp->s == 'i')
