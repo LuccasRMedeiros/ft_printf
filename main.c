@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 16:30:58 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:30:45 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 	int		ret;
 	
 	ret = ft_printf("%");
-	//pf_ret = printf("%");
+	//pf_ret = printf("%%\n");
 	printf("Return of ft_printf: \e[1;33m%d\e[0m\n", ret);
 	//printf("Return of printf: \e[1;33m%d\e[0m\n", pf_ret);
 	return (0);

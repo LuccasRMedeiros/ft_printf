@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:27:52 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 16:37:32 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:25:30 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	pf_refine_weights(t_fspec *tp, va_list args)
 {
 	va_list	c_args;
 
-	if (!tp->p)
+	if (tp->init)
 		return ;
 	va_copy(c_args, args);
 	if (tp->s == 'd' || tp->s == 'i')
