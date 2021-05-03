@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 10:43:05 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:59:34 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*pointer_parser(va_list args, t_fspec *tp)
 	ret = ft_strdup("0x");
 	if (!ret)
 		return (NULL);
-	if (tp->fs == '0')
+	if (tp->fs == '0' && tp->l > tp->sz)
 	{
 		tp->l -= 2;
 		tp->sz -= 2;
