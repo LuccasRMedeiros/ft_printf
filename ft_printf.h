@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/02 11:55:57 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:17:23 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 # include <stdarg.h>
 # include <libft.h>
+# include <stdio.h>
 
 # define P_FLAGS "0-"
 # define P_SIZES "123456789*"
