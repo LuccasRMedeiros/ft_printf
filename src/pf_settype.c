@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 12:03:41 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 12:40:07 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:44:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_fspec	*pf_settype(const char *str, va_list args)
 
 	ret = pf_newfspec();
 	str_c = '\0';
-	while (++str && ret->init)
+	while (*str && ++str && ret->init)
 	{
 		str_c = *str;
 		if (ft_strhvchr(P_FLAGS, str_c) && !(ret->fs == '-'))
