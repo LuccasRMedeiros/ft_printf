@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:09:00 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 11:17:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:40:07 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		ft_printf(const char *str, ...);
 char	*pf_txtparser(t_fspec *tp, va_list args);
 char	*pf_numparser(t_fspec *tp, va_list args);
 void	pf_refine_weights(t_fspec *tp, va_list args);
+void	pf_refine_long_weights(t_fspec *tp, va_list args);
 char	*pf_textformat(t_fspec *tp);
 t_fspec	*pf_newfspec(void);
 void	pf_delfspec(t_fspec **del);

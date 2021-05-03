@@ -6,13 +6,30 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:37 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/02 12:24:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:45:18 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static void	hex_parser(long unsigned int arg, int font, t_fspec *tp, char *ret)
+static void	longhex_parser(long unsigned int arg, int font, t_fspec *tp, char *ret)
+{
+	size_t	i;
+	char	*ltox;
+
+	i = 0;
+	while (tp->l)
+	{
+		ret[i] = '0';
+		--tp->l;
+		++i;
+	}
+	ltox = ft_ltox(arg, font);
+	ft_strlcat(ret, ltox, tp->sz + 1);
+	free(ltox);
+}
+
+static void	hex_parser(unsigned int arg, int font, t_fspec *tp, char *ret)
 {
 	size_t	i;
 	char	*dtox;
@@ -82,9 +99,11 @@ char	*pf_numparser(t_fspec *tp, va_list args)
 		dec_parser(va_arg(args, int), tp, ret);
 	else if (tp->s == 'u')
 		undec_parser(va_arg(args, unsigned int), tp, ret);
-	else if (tp->s == 'x' || tp->s == 'p')
-		hex_parser(va_arg(args, long unsigned int), LOW, tp, ret);
+	else if (tp->s == 'x')
+		hex_parser(va_arg(args, unsigned int), LOW, tp, ret);
 	else if (tp->s == 'X')
-		hex_parser(va_arg(args, long unsigned int), UPR, tp, ret);
+		hex_parser(va_arg(args, unsigned int), UPR, tp, ret);
+	else if (tp->s == 'p')
+		longhex_parser(va_arg(args, long unsigned int), LOW, tp, ret);
 	return (ret);
 }

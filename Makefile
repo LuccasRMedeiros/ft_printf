@@ -6,7 +6,7 @@
 #    By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/05/01 12:54:07 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/05/03 12:46:04 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC =	ft_printf.c \
 		pf_txtparser.c \
 		pf_numparser.c \
 		pf_refine_weights.c\
+		pf_refine_long_weights.c\
 		pf_textformat.c \
 		pf_settype.c \
 
