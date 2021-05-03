@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:27:52 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 12:31:59 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:58:26 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	pf_refine_long_weights(t_fspec *tp, va_list args)
 
 	va_copy(c_args, args);
 	if (tp->s == 'p')
-		refwghts_lunsdec(va_arg(c_args, unsigned int), tp);
+		refwghts_lunsdec(va_arg(c_args, long unsigned int), tp);
 	va_end(c_args);
 }
