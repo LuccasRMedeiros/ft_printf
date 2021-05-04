@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 10:57:56 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 17:59:34 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:09:55 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static char	*string_parser(char *str, t_fspec *tp)
 	char	*str_null;
 	size_t	i;
 
-	ret	= ft_calloc(tp->w + 1, sizeof(char));
+	ret = ft_calloc(tp->w + 1, sizeof(char));
 	str_copy = malloc((tp->sz + 1) * sizeof(char));
 	ft_strlcpy(str_copy, str, tp->sz + 1);
 	str_null = ft_strdup("(null)");

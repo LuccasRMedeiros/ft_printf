@@ -6,13 +6,13 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:37 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 12:45:18 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:09:55 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static void	longhex_parser(long unsigned int arg, int font, t_fspec *tp, char *ret)
+static void	lhex_parser(long unsigned int arg, int font, t_fspec *tp, char *ret)
 {
 	size_t	i;
 	char	*ltox;
@@ -104,6 +104,6 @@ char	*pf_numparser(t_fspec *tp, va_list args)
 	else if (tp->s == 'X')
 		hex_parser(va_arg(args, unsigned int), UPR, tp, ret);
 	else if (tp->s == 'p')
-		longhex_parser(va_arg(args, long unsigned int), LOW, tp, ret);
+		lhex_parser(va_arg(args, long unsigned int), LOW, tp, ret);
 	return (ret);
 }
