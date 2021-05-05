@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:21:01 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 12:41:11 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:03:20 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ bool	pf_error(const char *str)
 	size_t	i;
 	char	*test;
 
+	if (!str)
+		return (false);
 	i = 0;
 	test = ft_strchr(str, '%');
 	if (!test)
