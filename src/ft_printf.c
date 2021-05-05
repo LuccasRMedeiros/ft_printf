@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 13:15:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:02:19 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@
 #include <ft_printf.h>
 #include <stdio.h>
 
-static int	printf_type(const char *str, va_list args)
+static int	printf_type(t_fspec *type)
 {
 	char	*print;
 	size_t	p_sz;
-	t_fspec	*type;
 
-	type = pf_settype(str, args);
 	print = pf_textformat(type);
 	if (!print || type->init)
 	{
@@ -41,9 +39,33 @@ static int	printf_type(const char *str, va_list args)
 		++p_sz;
 	}
 	free(print);
-	str = ft_strchr(str + 1, type->s);
 	pf_delfspec(&type);
 	return (p_sz);
+}
+
+static int	printf_char(const char *str, va_list args)
+{
+	size_t	cnt;
+	t_fspec	*type;
+
+	cnt = 0;
+	type = NULL;
+	while (*str)
+	{
+		if (*str == '%')
+		{
+			type = pf_settype(str, args);
+			str = ft_strchr(str + 1, type->s);
+			cnt += printf_type(type);
+		}
+		else
+		{
+			ft_putchar_fd(*str, 1);
+			++cnt;
+		}
+		++str;
+	}
+	return (cnt);
 }
 
 int	ft_printf(const char *str, ...)
@@ -53,19 +75,8 @@ int	ft_printf(const char *str, ...)
 
 	if (pf_error(str))
 		return (0);
-	cnt = 0;
 	va_start(args, str);
-	while (*str)
-	{
-		if (*str == '%')
-			cnt += printf_type(str, args);
-		else
-		{
-			ft_putchar_fd(*str, 1);
-			++cnt;
-		}
-		++str;
-	}
+	cnt = printf_char(str, args);
 	va_end(args);
 	return (cnt);
 }

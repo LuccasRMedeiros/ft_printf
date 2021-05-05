@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:21:01 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 13:15:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:10:51 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	pf_error(const char *str)
 	while (test[i + 1] != '\0')
 	{
 		++i;
-		if (ft_strhvchr(P_SPECS, str[i]))
+		if (ft_strhvchr(P_SPECS, test[i]))
 			return (pf_error(test + i + 1));
 	}
 	return (true);
