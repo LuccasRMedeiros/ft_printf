@@ -6,7 +6,7 @@
 #    By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/05/05 12:16:46 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/05/05 12:33:40 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ clean:
 	@rm -rf $(OBJ_PATH)
 	@rm -f $(BIN)
 	@$(MSG_DONE)
-	@make -C $(LIBS_DIR) clear
+	@make -C $(LIBS_DIR) clean
 
 fclean:
 	@echo "-- Removing everything of ft_printf"
@@ -101,4 +101,4 @@ debug: re
 	@$(CC) $(FLAGS) $(INCLUDES) main.c -L. -lftprintf -o $(BIN)
 	@$(MSG_DONE)
 
-.PHONY: all clean fclean re exec makedeps
+.PHONY: all clean fclean re exec makedeps debug
