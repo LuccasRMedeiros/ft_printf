@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pf_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/01 19:01:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 12:11:43 by lrocigno         ###   ########.fr       */
+/*   Created: 2021/05/05 10:21:01 by lrocigno          #+#    #+#             */
+/*   Updated: 2021/05/05 12:10:09 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** This file exists to test the ft_printf during its early development.
-*/
+#include <ft_printf.h>
 
-#include "ft_printf.h"
-#include <limits.h>
-#include <stdio.h>
-
-int	main(void)
+bool	pf_error(const char *str)
 {
-	//int		pf_ret;
-	int		ret;
-	
-	ret = ft_printf("cspdiuxX%");
-	//pf_ret = printf("%.0p\n");
-	printf("Return of ft_printf: \e[1;33m%d\e[0m\n", ret);
-	//printf("Return of printf: \e[1;33m%d\e[0m\n", pf_ret);
-	return (0);
+	size_t	i;
+	char	*test;
+
+	i = 0;
+	test = ft_strchr(str, '%');
+	if (!test)
+		return (false);
+	while (test[i + 1] != '\0')
+	{
+		++i;
+		if (ft_strhvchr(P_SPECS, str[i]))
+			pf_error(test + i);
+	}
+	return (true);
 }

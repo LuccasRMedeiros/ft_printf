@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/03 17:54:38 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/05 12:15:28 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 
 #include <ft_printf.h>
 
-static int	printf_type(t_fspec *type)
+static int	printf_type(const char *str, va_list args)
 {
 	char	*print;
 	size_t	p_sz;
+	t_fspec	*type;
 
+	type = pf_settype(str, args);
 	print = pf_textformat(type);
 	if (!print || type->init)
 	{
@@ -38,6 +40,7 @@ static int	printf_type(t_fspec *type)
 		++p_sz;
 	}
 	free(print);
+	str = ft_strchr(str + 1, type->s);
 	pf_delfspec(&type);
 	return (p_sz);
 }
@@ -46,20 +49,15 @@ int	ft_printf(const char *str, ...)
 {
 	int		cnt;
 	va_list	args;
-	t_fspec	*type;
 
+	if (pf_error(str))
+		return (0);
 	cnt = 0;
 	va_start(args, str);
-	type = NULL;
 	while (*str)
 	{
 		if (*str == '%')
-		{
-			type = pf_settype(str, args);
-			if (!type->init)
-				str = ft_strchr(str + 1, type->s);
-			cnt += printf_type(type);
-		}
+			cnt += printf_type(str, args);
 		else
 		{
 			ft_putchar_fd(*str, 1);
