@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 12:15:28 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:15:23 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 */
 
 #include <ft_printf.h>
+#include <stdio.h>
 
 static int	printf_type(const char *str, va_list args)
 {

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:21:01 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 13:03:20 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:15:23 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	pf_error(const char *str)
 	{
 		++i;
 		if (ft_strhvchr(P_SPECS, str[i]))
-			pf_error(test + i + 1);
+			return (pf_error(test + i + 1));
 	}
 	return (true);
 }
