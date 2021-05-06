@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:50:15 by lrocigno          #+#    #+#             */
-/*   Updated: 2021/05/05 14:02:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:21:40 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int	printf_char(const char *str, va_list args)
 		if (*str == '%')
 		{
 			type = pf_settype(str, args);
-			str = ft_strchr(str + 1, type->s);
+			if (!type->init)
+				str = ft_strchr(str + 1, type->s);
 			cnt += printf_type(type);
 		}
 		else
@@ -73,8 +74,8 @@ int	ft_printf(const char *str, ...)
 	int		cnt;
 	va_list	args;
 
-	if (pf_error(str))
-		return (0);
+	/*if (pf_error(str))
+		return (0);*/
 	va_start(args, str);
 	cnt = printf_char(str, args);
 	va_end(args);
