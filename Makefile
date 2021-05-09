@@ -6,7 +6,7 @@
 #    By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/05/09 01:01:48 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/05/09 01:05:09 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ fclean:
 
 re: fclean all
 
-debug: FLAGS += -g
+debug: FLAGS = -g
 
 debug: LIBS_RULE = debug
 
