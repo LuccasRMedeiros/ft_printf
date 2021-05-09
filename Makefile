@@ -6,7 +6,7 @@
 #    By: lrocignoS <lrocigno@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/01 19:24:17 by lrocigno          #+#    #+#              #
-#    Updated: 2021/05/05 12:33:40 by lrocigno         ###   ########.fr        #
+#    Updated: 2021/05/09 01:01:48 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ HEADERS = ft_printf.h \
 		  libft.h \
 
 INCLUDES_PATH =	./\
-				$(LIBS_DIR)\
+				$(LIBS_DIR)/headers/\
 
 INCLUDES = $(foreach i, $(INCLUDES_PATH), -I $(i))
 
