@@ -1,0 +1,4 @@
+[submodule "libs/libft"]
+	path = libs/libft
+	url = git@github.com:LuccasRMedeiros/libft.git
+	branch = ft_printf
